@@ -90,55 +90,69 @@
 
 .pastor-greeting-section {
   display: flex;
-  gap: 3rem;
+  gap: 4rem;
   align-items: flex-start;
   max-width: 900px;
   margin: 0 auto;
+  padding: 2rem 0;
 }
 
 .pastor-photo-container {
   flex-shrink: 0;
-  width: 300px;
+  width: 280px;
 }
 
 .pastor-photo-placeholder {
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 3;
   background: #f7fafc;
-  border: 2px dashed #cbd5e0;
-  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .pastor-photo-placeholder img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 8px;
   display: block;
 }
 
 .pastor-photo-text {
   color: #a0aec0;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
   text-align: center;
 }
 
 .pastor-greeting-content {
   flex: 1;
+  padding-top: 1rem;
+}
+
+.pastor-greeting-header {
+  margin-bottom: 2.5rem;
 }
 
 .pastor-name {
   font-size: 2rem;
   font-weight: 700;
   color: #092f54;
-  margin: 0 0 2rem 0;
+  margin: 0 0 1rem 0;
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.pastor-divider {
+  width: 60px;
+  height: 4px;
+  background: #fbd160;
+  margin: 0;
 }
 
 .pastor-greeting-text {
@@ -368,6 +382,7 @@
     flex-direction: column;
     gap: 2rem;
     align-items: center;
+    padding: 1.5rem 0;
   }
 
   .pastor-photo-container {
@@ -375,10 +390,23 @@
     max-width: 280px;
   }
 
+  .pastor-greeting-content {
+    padding-top: 0;
+    width: 100%;
+  }
+
+  .pastor-greeting-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
   .pastor-name {
     font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .pastor-divider {
+    margin: 0 auto;
   }
 
   .pastor-greeting-text {

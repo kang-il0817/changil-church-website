@@ -71,7 +71,10 @@ function ChurchIntro() {
                   </div>
                 </div>
                 <div className="pastor-greeting-content">
-                  <h2 className="pastor-name">담임목사</h2>
+                  <div className="pastor-greeting-header">
+                    <h2 className="pastor-name">담임목사</h2>
+                    <div className="pastor-divider"></div>
+                  </div>
                   <div className="pastor-greeting-text">
                     <p>
                       창일교회에 오신 것을 환영합니다.
