@@ -98,7 +98,7 @@ function ChurchIntro() {
                 <div className="pastor-photo-container">
                   <div className="pastor-photo-placeholder">
                     <img 
-                      src="/pastor-photo.png" 
+                      src="/pastor-photo.jpg" 
                       alt="담임목사"
                       onLoad={(e) => {
                         console.log('이미지 로드 성공')
