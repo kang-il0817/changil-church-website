@@ -3,6 +3,7 @@ import './Header.css'
 
 function Header() {
   const [logoSrc, setLogoSrc] = useState('/logo-head.svg')
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   
   // 로고 이미지 형식 자동 감지
   useEffect(() => {
@@ -85,6 +86,38 @@ function Header() {
     }
   }
 
+  const handleMobileMenuClick = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
+
+  const handleMobileMenuItemClick = (path, sectionId = null) => {
+    setIsMobileMenuOpen(false)
+    
+    if (sectionId) {
+      // 메인 페이지 섹션으로 이동
+      const currentPath = window.location.pathname
+      if (currentPath !== '/' && currentPath !== '') {
+        if (window.navigate) {
+          window.navigate('/')
+        } else {
+          window.location.href = '/'
+        }
+        setTimeout(() => {
+          scrollToSection(sectionId)
+        }, 100)
+      } else {
+        scrollToSection(sectionId)
+      }
+    } else {
+      // 다른 페이지로 이동
+      if (window.navigate) {
+        window.navigate(path)
+      } else {
+        window.location.href = path
+      }
+    }
+  }
+
   return (
     <header className="header">
       <div className="header-container">
@@ -107,7 +140,84 @@ function Header() {
           <a href="#together" onClick={(e) => handleNavClick(e, 'together')}>함께해요</a>
           <a href="#live" onClick={(e) => handleNavClick(e, 'live')}>살아가요</a>
         </nav>
+        <button 
+          className="mobile-menu-button"
+          onClick={handleMobileMenuClick}
+          aria-label="메뉴"
+        >
+          <span className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
       </div>
+      {isMobileMenuOpen && (
+        <div className="mobile-menu-overlay" onClick={handleMobileMenuClick}>
+          <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
+            <div className="mobile-menu-header">
+              <h3>메뉴</h3>
+              <button 
+                className="mobile-menu-close"
+                onClick={handleMobileMenuClick}
+                aria-label="메뉴 닫기"
+              >
+                ×
+              </button>
+            </div>
+            <div className="mobile-menu-items">
+              <button 
+                className="mobile-menu-item"
+                onClick={() => handleMobileMenuItemClick('/church-intro')}
+              >
+                교회소개
+              </button>
+              <button 
+                className="mobile-menu-item"
+                onClick={() => handleMobileMenuItemClick('/coming-soon')}
+              >
+                섬기는 이들
+              </button>
+              <button 
+                className="mobile-menu-item"
+                onClick={() => handleMobileMenuItemClick('/bulletin')}
+              >
+                주보
+              </button>
+              <button 
+                className="mobile-menu-item"
+                onClick={() => handleMobileMenuItemClick('/worship-guide')}
+              >
+                예배안내
+              </button>
+              <button 
+                className="mobile-menu-item"
+                onClick={() => handleMobileMenuItemClick('/directions')}
+              >
+                오시는 길
+              </button>
+              <button 
+                className="mobile-menu-item"
+                onClick={() => handleMobileMenuItemClick('/new-family-visit')}
+              >
+                새가족 방문
+              </button>
+              <button 
+                className="mobile-menu-item"
+                onClick={() => handleMobileMenuItemClick(null, 'together')}
+              >
+                시역 | 행사
+              </button>
+              <button 
+                className="mobile-menu-item"
+                onClick={() => handleMobileMenuItemClick('/gallery')}
+              >
+                창일 갤러리
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   )
 }
