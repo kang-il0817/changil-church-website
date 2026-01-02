@@ -6,6 +6,8 @@ import './BulletinDetail.css'
 function BulletinDetail({ id }) {
   const [bulletin, setBulletin] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [selectedImage, setSelectedImage] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     // URL에서 ID 추출
@@ -41,6 +43,20 @@ function BulletinDetail({ id }) {
     } else {
       window.location.href = '/bulletin'
     }
+  }
+
+  const handleImageClick = (e, imageUrl) => {
+    // 모바일에서만 모달 열기
+    if (window.innerWidth <= 768) {
+      e.stopPropagation()
+      setSelectedImage(imageUrl)
+      setIsModalOpen(true)
+    }
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    setSelectedImage(null)
   }
 
   const isPDF = (url) => {
@@ -137,8 +153,10 @@ function BulletinDetail({ id }) {
                   src={fileUrl}
                   alt={`${bulletin.title || '주보'} ${index + 1}`}
                   className="bulletin-image"
+                  onClick={(e) => handleImageClick(e, fileUrl)}
                   style={{ 
-                    marginBottom: index < bulletin.imageUrls.length - 1 ? '2rem' : '0' 
+                    marginBottom: index < bulletin.imageUrls.length - 1 ? '2rem' : '0',
+                    cursor: window.innerWidth <= 768 ? 'pointer' : 'default'
                   }}
                   onError={(e) => {
                     e.target.src = 'https://via.placeholder.com/800x1131?text=이미지를+불러올+수+없습니다'
@@ -170,6 +188,8 @@ function BulletinDetail({ id }) {
                 src={bulletin.imageUrl || 'https://via.placeholder.com/800x1131?text=이미지를+불러올+수+없습니다'}
                 alt={bulletin.title || '주보'}
                 className="bulletin-image"
+                onClick={(e) => handleImageClick(e, bulletin.imageUrl)}
+                style={{ cursor: window.innerWidth <= 768 ? 'pointer' : 'default' }}
                 onError={(e) => {
                   e.target.src = 'https://via.placeholder.com/800x1131?text=이미지를+불러올+수+없습니다'
                 }}
@@ -178,6 +198,24 @@ function BulletinDetail({ id }) {
           )}
         </div>
       </div>
+
+      {/* 이미지 모달 (모바일용) */}
+      {isModalOpen && selectedImage && (
+        <div className="bulletin-image-modal-overlay" onClick={closeModal}>
+          <div className="bulletin-image-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="bulletin-image-modal-close" onClick={closeModal}>×</button>
+            <img 
+              src={selectedImage} 
+              alt="주보 이미지"
+              className="bulletin-image-modal-image"
+              onError={(e) => {
+                e.target.src = 'https://via.placeholder.com/400x566?text=이미지를+불러올+수+없습니다'
+              }}
+            />
+          </div>
+        </div>
+      )}
+
       <Footer />
     </div>
   )
