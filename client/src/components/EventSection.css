@@ -111,94 +111,44 @@
   }
   
   .event-posters {
-    grid-template-columns: 1fr;
-    gap: 0;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
     justify-items: center;
     position: relative;
-    min-height: 400px;
-    display: block;
+    display: grid;
   }
   
-  /* 모바일에서 현재 활성화된 포스터만 표시 */
+  /* 모바일에서 2개씩 표시 */
   .event-poster-item {
     max-width: 100%;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    position: relative;
+    opacity: 1;
+    transform: none;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    pointer-events: none;
+    pointer-events: auto;
   }
   
   .event-poster-item.event-poster-active {
     position: relative;
     opacity: 1;
-    transform: translateX(-50%);
+    transform: none;
     pointer-events: auto;
-    z-index: 10;
+    z-index: 1;
   }
   
   .event-poster-first {
     max-width: 100%;
   }
-}
-
-/* 이벤트 네비게이션 */
-.event-navigation {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  margin-top: 2rem;
-  padding: 1rem 0;
-}
-
-.event-nav-button {
-  background: #092f54;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  font-size: 2rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-  line-height: 1;
-  padding: 0;
-}
-
-.event-nav-button:hover {
-  background: #061f3a;
-  transform: scale(1.1);
-}
-
-.event-nav-button:active {
-  transform: scale(0.95);
-}
-
-.event-nav-indicator {
-  font-size: 1rem;
-  color: #4a5568;
-  font-weight: 500;
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-  min-width: 60px;
-  text-align: center;
-}
-
-@media (max-width: 768px) {
-  .event-navigation {
-    display: flex;
+  
+  .event-poster-image {
+    width: 100%;
+    max-width: 100%;
   }
 }
+
 
 /* 행사 상세 모달 */
 .event-modal-overlay {
@@ -364,15 +314,12 @@
     font-size: 0.9rem;
   }
 
-  .event-posters {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 480px) {
   .event-posters {
-    grid-template-columns: 1fr;
-    min-height: 350px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
   }
   
   .event-nav-button {

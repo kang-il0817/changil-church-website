@@ -7,7 +7,6 @@ function EventSection() {
   const [selectedEvent, setSelectedEvent] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
-  const [currentIndex, setCurrentIndex] = useState(0)
   const sectionRef = useRef(null)
 
   useEffect(() => {
@@ -114,14 +113,6 @@ function EventSection() {
   // 최대 4개만 표시
   const displayEvents = events.slice(0, 4)
 
-  const handlePrevious = () => {
-    setCurrentIndex((prev) => (prev === 0 ? displayEvents.length - 1 : prev - 1))
-  }
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev === displayEvents.length - 1 ? 0 : prev + 1))
-  }
-
   return (
     <>
       <section className="event-section" ref={sectionRef}>
@@ -138,15 +129,11 @@ function EventSection() {
               {displayEvents.map((event, index) => (
                 <div 
                   key={event._id || index} 
-                  className={`event-poster-item ${index === 0 ? 'event-poster-first' : 'event-poster-other'} ${index === currentIndex ? 'event-poster-active' : ''}`}
+                  className={`event-poster-item ${index === 0 ? 'event-poster-first' : 'event-poster-other'}`}
                   onClick={(e) => {
                     e.preventDefault()
                     e.stopPropagation()
                     openModal(event)
-                  }}
-                  style={{ 
-                    pointerEvents: index === currentIndex ? 'auto' : 'none',
-                    zIndex: index === currentIndex ? 10 : 1
                   }}
                 >
                   <img 
@@ -163,27 +150,6 @@ function EventSection() {
                 </div>
               ))}
             </div>
-            {displayEvents.length > 1 && (
-              <div className="event-navigation">
-                <button 
-                  className="event-nav-button event-nav-prev"
-                  onClick={handlePrevious}
-                  aria-label="이전 포스터"
-                >
-                  ‹
-                </button>
-                <span className="event-nav-indicator">
-                  {currentIndex + 1} / {displayEvents.length}
-                </span>
-                <button 
-                  className="event-nav-button event-nav-next"
-                  onClick={handleNext}
-                  aria-label="다음 포스터"
-                >
-                  ›
-                </button>
-              </div>
-            )}
           </div>
         </div>
       </section>
