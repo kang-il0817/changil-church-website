@@ -89,38 +89,71 @@
 }
 
 .pastor-greeting-section {
-  display: flex;
-  gap: 4rem;
-  align-items: flex-start;
+  position: relative;
   max-width: 900px;
   margin: 0 auto;
   padding: 2rem 0;
+  min-height: 500px;
+}
+
+.pastor-greeting-content {
+  position: relative;
+  z-index: 1;
+  padding-right: 320px;
+  margin-bottom: 2rem;
+}
+
+.pastor-greeting-text {
+  line-height: 2;
+  color: #2d3748;
+  font-size: 1.1rem;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  letter-spacing: 0.01em;
+}
+
+.pastor-greeting-text p {
+  margin: 0 0 1.8rem 0;
+}
+
+.pastor-greeting-text p:last-child {
+  margin-bottom: 0;
+}
+
+.pastor-quote {
+  font-style: italic;
+  color: #4a5568;
+  margin-bottom: 2rem !important;
+  padding-left: 1rem;
+  border-left: 3px solid #e2e8f0;
 }
 
 .pastor-photo-container {
-  flex-shrink: 0;
-  width: 280px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  z-index: 2;
 }
 
 .pastor-photo-placeholder {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 4;
   background: #f7fafc;
   border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  border-radius: 20px 0 0 0;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: -4px -4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .pastor-photo-placeholder img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 20px 0 0 0;
   display: block;
 }
 
@@ -129,46 +162,6 @@
   font-size: 0.9rem;
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
   text-align: center;
-}
-
-.pastor-greeting-content {
-  flex: 1;
-  padding-top: 1rem;
-}
-
-.pastor-greeting-header {
-  margin-bottom: 2.5rem;
-}
-
-.pastor-name {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #092f54;
-  margin: 0 0 1rem 0;
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-}
-
-.pastor-divider {
-  width: 60px;
-  height: 4px;
-  background: #fbd160;
-  margin: 0;
-}
-
-.pastor-greeting-text {
-  line-height: 2;
-  color: #4a5568;
-  font-size: 1.1rem;
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-  letter-spacing: 0.02em;
-}
-
-.pastor-greeting-text p {
-  margin: 0 0 1.5rem 0;
-}
-
-.pastor-greeting-text p:last-child {
-  margin-bottom: 0;
 }
 
 .pastor-signature {
@@ -379,40 +372,45 @@
   }
 
   .pastor-greeting-section {
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
     padding: 1.5rem 0;
-  }
-
-  .pastor-photo-container {
-    width: 100%;
-    max-width: 280px;
+    min-height: auto;
   }
 
   .pastor-greeting-content {
-    padding-top: 0;
-    width: 100%;
-  }
-
-  .pastor-greeting-header {
-    text-align: center;
+    padding-right: 0;
     margin-bottom: 2rem;
   }
 
-  .pastor-name {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .pastor-divider {
-    margin: 0 auto;
-  }
-
   .pastor-greeting-text {
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.8;
-    text-align: left;
+  }
+
+  .pastor-greeting-text p {
+    margin: 0 0 1.5rem 0;
+  }
+
+  .pastor-quote {
+    font-size: 0.9rem;
+    padding-left: 0.75rem;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .pastor-photo-container {
+    position: relative;
+    width: 100%;
+    max-width: 250px;
+    margin: 2rem auto 0;
+  }
+
+  .pastor-photo-placeholder {
+    aspect-ratio: 3 / 4;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .pastor-photo-placeholder img {
+    border-radius: 20px 20px 0 0;
   }
 
   .intro-subtitle {

@@ -65,23 +65,29 @@ function ChurchIntro() {
           {activeTab === 'pastor' && (
             <div className="tab-content">
               <div className="pastor-greeting-section">
+                <div className="pastor-greeting-content">
+                  <div className="pastor-greeting-text">
+                    <p className="pastor-quote">
+                      "별은 단순히 가스 덩어리가 아니다. 별은 불멸의 거인이다."<br />
+                      - C.S. 루이스, 『새벽 출정호의 항해』
+                    </p>
+                    <p>
+                      우리 사회는 점점 더 효율성의 언어로 세상을 이해하게 되었습니다. 그 과정에서 삶의 신비와 경이, 그리고 진정한 만남은 서서히 사라져갔습니다.
+                    </p>
+                    <p>
+                      하나님은 개인적인 존재이십니다. 하나님은 복음을 통해 우리를 부르십니다. 하나님 앞에서 우리는 서로를 "대상"이 아닌 "이웃"으로 만나게 됩니다.
+                    </p>
+                    <p>
+                      창일교회는 바로 이런 진정한 만남을 지향합니다. 말씀과 기도로 하나님을 만나고, 그 만남 속에서 서로의 삶을 존중하며 함께 걷는 만남의 공동체를 꿈꿉니다.
+                    </p>
+                    <p>
+                      의미와 경이가 되살아나고, 하나님과 이웃을 개인적으로 만나는 아름다운 길에 여러분을 진심으로 초대합니다.
+                    </p>
+                  </div>
+                </div>
                 <div className="pastor-photo-container">
                   <div className="pastor-photo-placeholder">
                     <span className="pastor-photo-text">담임목사 사진</span>
-                  </div>
-                </div>
-                <div className="pastor-greeting-content">
-                  <div className="pastor-greeting-header">
-                    <h2 className="pastor-name">담임목사</h2>
-                    <div className="pastor-divider"></div>
-                  </div>
-                  <div className="pastor-greeting-text">
-                    <p>
-                      창일교회에 오신 것을 환영합니다.
-                    </p>
-                    <p>
-                      여기에 담임목사 인사말을 입력해주세요.
-                    </p>
                   </div>
                 </div>
               </div>
