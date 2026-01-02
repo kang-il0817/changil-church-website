@@ -100,9 +100,14 @@ function ChurchIntro() {
                     <img 
                       src="/pastor-photo.png" 
                       alt="담임목사"
-                      onLoad={() => setPastorImageLoaded(true)}
-                      onError={() => setPastorImageError(true)}
-                      style={{ display: pastorImageLoaded ? 'block' : 'none' }}
+                      onLoad={() => {
+                        setPastorImageLoaded(true)
+                        setPastorImageError(false)
+                      }}
+                      onError={() => {
+                        setPastorImageError(true)
+                        setPastorImageLoaded(false)
+                      }}
                     />
                     {!pastorImageLoaded && !pastorImageError && (
                       <span className="pastor-photo-text">로딩 중...</span>

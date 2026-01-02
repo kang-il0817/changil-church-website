@@ -161,6 +161,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 2;
 }
 
 .pastor-photo-text {
@@ -169,11 +170,7 @@
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
   text-align: center;
   z-index: 1;
-}
-
-/* 이미지가 있을 때 텍스트 숨기기 */
-.pastor-photo-placeholder:has(img) .pastor-photo-text {
-  display: none;
+  position: relative;
 }
 
 .pastor-signature {
