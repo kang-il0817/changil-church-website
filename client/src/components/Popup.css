@@ -6,8 +6,10 @@
   bottom: 0;
   background: rgba(0, 0, 0, 0.6);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 20vh; /* 배너 높이 고려 */
+  padding-left: 2rem;
   z-index: 10000;
   animation: fadeIn 0.3s ease-in-out;
 }
@@ -25,11 +27,12 @@
   position: relative;
   background: transparent;
   border-radius: 12px;
-  max-width: 600px;
-  width: 90%;
+  max-width: 400px;
+  width: auto;
   overflow: hidden;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   animation: slideUp 0.3s ease-out;
+  margin: 0;
 }
 
 @keyframes slideUp {
@@ -161,8 +164,15 @@
 }
 
 @media (max-width: 768px) {
+  .popup-overlay {
+    padding-top: 15vh;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
   .popup-container {
-    width: 95%;
+    width: 90%;
+    max-width: 350px;
     max-height: 85vh;
   }
 
