@@ -96,6 +96,15 @@ function EventSection() {
     document.body.style.overflow = 'unset'
   }
 
+  // 행사 목록 페이지로 이동 (갤러리 페이지로 연결)
+  const handleViewAllClick = () => {
+    if (window.navigate) {
+      window.navigate('/gallery')
+    } else {
+      window.location.href = '/gallery'
+    }
+  }
+
   if (loading) {
     return (
       <section className="event-section">
@@ -151,6 +160,16 @@ function EventSection() {
               ))}
             </div>
           </div>
+          {displayEvents.length > 0 && (
+            <div className="event-view-all">
+              <button 
+                className="event-view-all-button"
+                onClick={handleViewAllClick}
+              >
+                목록보기
+              </button>
+            </div>
+          )}
         </div>
       </section>
 

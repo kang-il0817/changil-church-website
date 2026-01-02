@@ -96,6 +96,31 @@
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
 }
 
+/* 목록보기 버튼 */
+.event-view-all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  padding: 1rem 0;
+}
+
+.event-view-all-button {
+  background: none;
+  border: none;
+  color: #718096;
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.3s;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  padding: 0.5rem 0;
+}
+
+.event-view-all-button:hover {
+  color: #667eea;
+}
+
 @media (max-width: 768px) {
   .event-section {
     padding: 3rem 0;
