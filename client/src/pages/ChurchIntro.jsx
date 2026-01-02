@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import './ChurchIntro.css'
@@ -8,6 +8,27 @@ function ChurchIntro() {
   const [openItem, setOpenItem] = useState(null) // 열린 교회 유형 항목
   const [pastorImageLoaded, setPastorImageLoaded] = useState(false)
   const [pastorImageError, setPastorImageError] = useState(false)
+
+  // 이미지 존재 여부 확인
+  useEffect(() => {
+    const img = new Image()
+    const imageUrl = '/pastor-photo.jpg'
+    
+    img.onload = () => {
+      console.log('✅ 이미지 존재 확인됨:', imageUrl)
+      setPastorImageLoaded(true)
+      setPastorImageError(false)
+    }
+    
+    img.onerror = () => {
+      console.error('❌ 이미지를 찾을 수 없음:', imageUrl)
+      console.error('전체 URL:', window.location.origin + imageUrl)
+      setPastorImageError(true)
+      setPastorImageLoaded(false)
+    }
+    
+    img.src = imageUrl
+  }, [])
 
   const tabs = [
     { id: 'pastor', label: '담임목사 인사' },
