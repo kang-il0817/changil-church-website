@@ -109,10 +109,12 @@
   font-size: 1.1rem;
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
   letter-spacing: 0.01em;
+  text-align: left;
 }
 
 .pastor-greeting-text p {
   margin: 0 0 1.8rem 0;
+  text-align: left;
 }
 
 .pastor-greeting-text p:last-child {
@@ -124,7 +126,8 @@
   color: #4a5568;
   margin-bottom: 2rem !important;
   padding-left: 1rem;
-  border-left: 3px solid #e2e8f0;
+  border-left: 3px solid #fbd160;
+  text-align: left;
 }
 
 .pastor-photo-container {
