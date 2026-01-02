@@ -88,13 +88,73 @@
   margin: 0 0 1.5rem 0;
 }
 
-.pastor-greeting-image {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  display: block;
+.pastor-greeting-section {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  max-width: 900px;
   margin: 0 auto;
-  border-radius: 8px;
+}
+
+.pastor-photo-container {
+  flex-shrink: 0;
+  width: 300px;
+}
+
+.pastor-photo-placeholder {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: #f7fafc;
+  border: 2px dashed #cbd5e0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.pastor-photo-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+.pastor-photo-text {
+  color: #a0aec0;
+  font-size: 1rem;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  text-align: center;
+}
+
+.pastor-greeting-content {
+  flex: 1;
+}
+
+.pastor-name {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #092f54;
+  margin: 0 0 2rem 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.pastor-greeting-text {
+  line-height: 2;
+  color: #4a5568;
+  font-size: 1.1rem;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.pastor-greeting-text p {
+  margin: 0 0 1.5rem 0;
+}
+
+.pastor-greeting-text p:last-child {
+  margin-bottom: 0;
 }
 
 .pastor-signature {
@@ -302,6 +362,29 @@
 
   .content-body {
     font-size: 1rem;
+  }
+
+  .pastor-greeting-section {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .pastor-photo-container {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .pastor-name {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .pastor-greeting-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    text-align: left;
   }
 
   .intro-subtitle {

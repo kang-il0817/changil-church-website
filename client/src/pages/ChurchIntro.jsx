@@ -64,12 +64,23 @@ function ChurchIntro() {
         <div className="church-intro-content">
           {activeTab === 'pastor' && (
             <div className="tab-content">
-              <div className="content-body">
-                <img 
-                  src="/pastor-greeting.svg" 
-                  alt="담임목사 인사" 
-                  className="pastor-greeting-image"
-                />
+              <div className="pastor-greeting-section">
+                <div className="pastor-photo-container">
+                  <div className="pastor-photo-placeholder">
+                    <span className="pastor-photo-text">담임목사 사진</span>
+                  </div>
+                </div>
+                <div className="pastor-greeting-content">
+                  <h2 className="pastor-name">담임목사</h2>
+                  <div className="pastor-greeting-text">
+                    <p>
+                      창일교회에 오신 것을 환영합니다.
+                    </p>
+                    <p>
+                      여기에 담임목사 인사말을 입력해주세요.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           )}
