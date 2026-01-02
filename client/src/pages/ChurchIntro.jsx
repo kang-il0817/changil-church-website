@@ -104,9 +104,14 @@ function ChurchIntro() {
                         setPastorImageLoaded(true)
                         setPastorImageError(false)
                       }}
-                      onError={() => {
+                      onError={(e) => {
+                        console.error('이미지 로드 실패:', e)
                         setPastorImageError(true)
                         setPastorImageLoaded(false)
+                      }}
+                      style={{ 
+                        opacity: pastorImageLoaded ? 1 : 0,
+                        transition: 'opacity 0.3s ease'
                       }}
                     />
                     {!pastorImageLoaded && !pastorImageError && (
