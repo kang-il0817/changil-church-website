@@ -305,14 +305,18 @@
   }
 
   .intro-subtitle {
-    font-size: 1.1rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .vision-text {
-    font-size: 1.1rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.5;
     text-align: center;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .church-type-header {
@@ -355,7 +359,10 @@
 
   .church-type-content-inner {
     padding: 1rem;
-    font-size: 1rem;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .church-affiliation-section {
