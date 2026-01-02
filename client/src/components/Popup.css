@@ -189,14 +189,15 @@
   }
 
   .popup-footer {
-    flex-direction: column;
+    flex-direction: row;
     gap: 0.5rem;
     padding: 0.5rem;
+    justify-content: space-between;
   }
 
   .popup-close-btn,
   .popup-dont-show-btn {
-    width: 100%;
+    flex: 1;
     padding: 0.5rem 0.75rem;
     font-size: 0.8rem;
   }
