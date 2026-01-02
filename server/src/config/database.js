@@ -12,13 +12,18 @@ const connectDB = async () => {
       throw new Error('MongoDB URI가 설정되지 않았습니다.');
     }
 
-    const conn = await mongoose.connect(mongoURI);
+    console.log('MongoDB 연결 시도 중...');
+    const conn = await mongoose.connect(mongoURI, {
+      serverSelectionTimeoutMS: 5000, // 5초 타임아웃
+      socketTimeoutMS: 45000,
+    });
 
     console.log(`MongoDB Connected: ${conn.connection.host}`);
+    return conn;
   } catch (error) {
     console.error(`MongoDB 연결 오류: ${error.message}`);
     console.error('MongoDB 연결을 확인하세요.');
-    process.exit(1);
+    throw error; // process.exit 대신 에러를 throw하여 상위에서 처리
   }
 };
 
