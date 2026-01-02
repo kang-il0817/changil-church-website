@@ -49,6 +49,17 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
+  position: relative;
+}
+
+/* 데스크탑: 새 이미지가 왼쪽으로 */
+.window-image-item {
+  order: 0;
+}
+
+/* 최신 포스트가 왼쪽에 오도록 (날짜 기준 정렬은 서버에서 처리) */
+.window-image-item:first-child {
+  order: -1;
 }
 
 .window-image-item {
@@ -120,6 +131,17 @@
 @media (max-width: 968px) {
   .window-images {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 데스크탑 네비게이션 숨기기 */
+.window-navigation {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .window-navigation {
+    display: flex;
   }
 }
 
@@ -295,6 +317,74 @@
   
   .window-images {
     grid-template-columns: 1fr;
+    position: relative;
+    min-height: 300px;
+  }
+
+  /* 모바일에서 현재 활성화된 이미지만 표시 */
+  .window-image-item {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  .window-image-item.window-image-active {
+    position: relative;
+    opacity: 1;
+    transform: translateX(-50%);
+    pointer-events: auto;
+    z-index: 10;
+  }
+
+  /* 모바일 네비게이션 */
+  .window-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding: 1rem 0;
+  }
+
+  .window-nav-button {
+    background: #092f54;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    line-height: 1;
+    padding: 0;
+  }
+
+  .window-nav-button:hover {
+    background: #061f3a;
+    transform: scale(1.1);
+  }
+
+  .window-nav-button:active {
+    transform: scale(0.95);
+  }
+
+  .window-nav-indicator {
+    font-size: 1rem;
+    color: #4a5568;
+    font-weight: 500;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    min-width: 60px;
+    text-align: center;
   }
 
   /* 모바일 모달 스타일 */
