@@ -95,7 +95,7 @@ function ChurchIntro() {
                 </div>
                 <div className="pastor-photo-container">
                   <div className="pastor-photo-placeholder">
-                    <span className="pastor-photo-text">담임목사 사진</span>
+                    <img src="/pastor-photo.png" alt="담임목사" />
                   </div>
                 </div>
               </div>
