@@ -157,21 +157,43 @@
   .footer-content {
     flex-direction: column;
     gap: 1.5rem;
+    align-items: center;
   }
   
   .footer-left {
     text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .footer-logo {
     justify-content: center;
+    width: 100%;
+    display: flex;
   }
   
   .footer-details {
     text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-details p {
+    text-align: center;
+    margin: 0.3rem 0;
   }
   
   .footer-right {
+    justify-content: center;
+    width: 100%;
+    display: flex;
+  }
+  
+  .footer-social {
     justify-content: center;
   }
   
