@@ -12,9 +12,10 @@ function MainBanner() {
 
   const [loadedVideos, setLoadedVideos] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [isLoading, setIsLoading] = useState(true)
   const videoRefs = useRef([])
 
-  // 동영상 로드 확인
+  // 동영상 로드 확인 - oncanplay 사용 (전체 로드 대신 재생 가능할 때)
   useEffect(() => {
     const checkVideos = async () => {
       const loaded = []
@@ -22,16 +23,19 @@ function MainBanner() {
       for (const path of videoPaths) {
         try {
           const video = document.createElement('video')
+          video.preload = 'metadata' // 메타데이터만 먼저 로드
+          
           await new Promise((resolve, reject) => {
-            video.oncanplaythrough = () => {
+            // oncanplay: 재생 가능할 때 (전체 로드 대기하지 않음)
+            video.oncanplay = () => {
               loaded.push(path)
               resolve()
             }
             video.onerror = () => reject()
             video.src = path
             video.load()
-            // 타임아웃 설정 (3초)
-            setTimeout(() => reject(), 3000)
+            // 타임아웃 설정 (10초로 증가 - 큰 파일 대응)
+            setTimeout(() => reject(), 10000)
           })
         } catch {
           // 동영상 로드 실패 시 무시
@@ -39,6 +43,7 @@ function MainBanner() {
       }
       
       setLoadedVideos(loaded)
+      setIsLoading(false)
     }
 
     checkVideos()
@@ -62,13 +67,18 @@ function MainBanner() {
   }
 
   // 배너가 없으면 아무것도 표시하지 않음
-  if (loadedVideos.length === 0) {
+  if (loadedVideos.length === 0 && !isLoading) {
     return null
   }
 
   return (
     <section className="main-banner">
       <div className="banner-container">
+        {isLoading && (
+          <div className="banner-loading">
+            <div className="banner-loading-spinner"></div>
+          </div>
+        )}
         <div className="banner-slider">
           {loadedVideos.map((videoPath, index) => (
             <div key={index} className="banner-slide">
@@ -80,6 +90,7 @@ function MainBanner() {
                 muted
                 loop={loadedVideos.length === 1} // 동영상이 1개일 때만 루프
                 playsInline
+                preload="auto" // 자동 프리로드
                 onEnded={handleVideoEnd}
                 aria-label={`창일교회 배너 동영상 ${index + 1}`}
               >
