@@ -468,6 +468,37 @@ function Admin() {
     }
   }
 
+  // 공통 이미지 업로드 함수 (이벤트, 갤러리, 팝업용)
+  const uploadImageToSupabase = async (file, bucket = GALLERY_BUCKET, folder = 'gallery') => {
+    if (!supabase) {
+      throw new Error('Supabase가 설정되지 않았습니다.')
+    }
+
+    try {
+      const fileExt = file.name.split('.').pop()
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`
+      const filePath = `${folder}/${fileName}`
+
+      const { data, error } = await supabase.storage
+        .from(bucket)
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: false
+        })
+
+      if (error) throw error
+
+      const { data: { publicUrl } } = supabase.storage
+        .from(bucket)
+        .getPublicUrl(filePath)
+
+      return publicUrl
+    } catch (error) {
+      console.error('Supabase 업로드 오류:', error)
+      throw new Error(`이미지 업로드 실패: ${error.message}`)
+    }
+  }
+
   const uploadBulletinImageToSupabase = async (file) => {
     if (!supabase) {
       throw new Error('Supabase가 설정되지 않았습니다.')
