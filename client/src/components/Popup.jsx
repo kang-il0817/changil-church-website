@@ -59,7 +59,26 @@ function Popup() {
 
   const handleLinkClick = () => {
     if (popup && popup.linkUrl) {
-      window.open(popup.linkUrl, '_blank', 'noopener,noreferrer');
+      // 내부 경로인지 외부 URL인지 확인
+      if (popup.linkUrl.startsWith('/')) {
+        // 내부 경로인 경우
+        if (window.navigate) {
+          window.navigate(popup.linkUrl);
+        } else {
+          window.location.href = popup.linkUrl;
+        }
+        handleClose(); // 팝업 닫기
+      } else {
+        // 외부 URL인 경우 새 창에서 열기
+        window.open(popup.linkUrl, '_blank', 'noopener,noreferrer');
+        handleClose(); // 팝업 닫기
+      }
+    }
+  };
+
+  const handleImageClick = () => {
+    if (popup && popup.linkUrl) {
+      handleLinkClick();
     }
   };
 
@@ -72,7 +91,10 @@ function Popup() {
       <div className="popup-container" onClick={(e) => e.stopPropagation()}>
         {popup.imageUrl && (
           <>
-            <div className="popup-image-container">
+            <div 
+              className={`popup-image-container ${popup.linkUrl ? 'popup-image-clickable' : ''}`}
+              onClick={popup.linkUrl ? handleImageClick : undefined}
+            >
               <img 
                 src={popup.imageUrl} 
                 alt={popup.title || '팝업 이미지'} 
