@@ -228,3 +228,100 @@
   }
 }
 
+/* 주보 이미지 모달 (모바일용) */
+.bulletin-image-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.bulletin-image-modal-content {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.bulletin-image-modal-close {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 3rem;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  line-height: 1;
+  padding: 0;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.bulletin-image-modal-close:hover {
+  transform: scale(1.2);
+  opacity: 0.8;
+}
+
+.bulletin-image-modal-image {
+  max-width: 100%;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+  .bulletin-image-modal-close {
+    top: 10px;
+    right: 10px;
+    font-size: 2.5rem;
+    width: 45px;
+    height: 45px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+  }
+
+  .bulletin-image-modal-image {
+    max-height: 85vh;
+  }
+}
+

@@ -6,6 +6,8 @@ import './Bulletin.css'
 function Bulletin() {
   const [bulletins, setBulletins] = useState([])
   const [loading, setLoading] = useState(true)
+  const [selectedImage, setSelectedImage] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     fetchBulletins()
@@ -29,6 +31,20 @@ function Bulletin() {
     } else {
       window.location.href = `/bulletin/${bulletinId}`
     }
+  }
+
+  const handleImageClick = (e, imageUrl) => {
+    // 모바일에서만 모달 열기
+    if (window.innerWidth <= 768) {
+      e.stopPropagation() // 상위 클릭 이벤트 방지
+      setSelectedImage(imageUrl)
+      setIsModalOpen(true)
+    }
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    setSelectedImage(null)
   }
 
   const isPDF = (url) => {
@@ -87,6 +103,8 @@ function Bulletin() {
                           src={fileUrl} 
                           alt={`${getLatestBulletin().title || '최근 주보'} ${index + 1}`}
                           className="bulletin-latest-image"
+                          onClick={(e) => handleImageClick(e, fileUrl)}
+                          style={{ cursor: window.innerWidth <= 768 ? 'pointer' : 'default' }}
                           onError={(e) => {
                             e.target.src = 'https://via.placeholder.com/400x566?text=이미지를+불러올+수+없습니다'
                           }}
@@ -107,6 +125,8 @@ function Bulletin() {
                         src={getLatestBulletin().imageUrl} 
                         alt={getLatestBulletin().title || '최근 주보'}
                         className="bulletin-latest-image"
+                        onClick={(e) => handleImageClick(e, getLatestBulletin().imageUrl)}
+                        style={{ cursor: window.innerWidth <= 768 ? 'pointer' : 'default' }}
                         onError={(e) => {
                           e.target.src = 'https://via.placeholder.com/400x566?text=이미지를+불러올+수+없습니다'
                         }}
@@ -159,6 +179,24 @@ function Bulletin() {
           </>
         )}
       </div>
+
+      {/* 이미지 모달 (모바일용) */}
+      {isModalOpen && selectedImage && (
+        <div className="bulletin-image-modal-overlay" onClick={closeModal}>
+          <div className="bulletin-image-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="bulletin-image-modal-close" onClick={closeModal}>×</button>
+            <img 
+              src={selectedImage} 
+              alt="주보 이미지"
+              className="bulletin-image-modal-image"
+              onError={(e) => {
+                e.target.src = 'https://via.placeholder.com/400x566?text=이미지를+불러올+수+없습니다'
+              }}
+            />
+          </div>
+        </div>
+      )}
+
       <Footer />
     </div>
   )
