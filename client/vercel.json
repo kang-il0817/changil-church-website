@@ -5,6 +5,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://changil-church-website-backend-f3cef88b0d96.herokuapp.com/api/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
