@@ -282,6 +282,27 @@
   .sermon-table td {
     padding: 0.75rem 0.5rem;
   }
+  
+  /* 모바일에서 본문 및 제목, 설교자 컬럼 숨기기 */
+  .sermon-table th:nth-child(4),
+  .sermon-table td:nth-child(4),
+  .sermon-table th:nth-child(5),
+  .sermon-table td:nth-child(5) {
+    display: none;
+  }
+  
+  /* 모바일에서 컬럼 너비 조정 */
+  .sermon-table th:nth-child(1) {
+    width: 15%;
+  }
+  
+  .sermon-table th:nth-child(2) {
+    width: 45%;
+  }
+  
+  .sermon-table th:nth-child(3) {
+    width: 40%;
+  }
 }
 
 
