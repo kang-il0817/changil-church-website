@@ -97,31 +97,37 @@ function ChurchIntro() {
                 </div>
                 <div className="pastor-photo-container">
                   <div className="pastor-photo-placeholder">
-                    <img 
-                      src="/pastor-photo.jpg" 
-                      alt="담임목사"
-                      onLoad={(e) => {
-                        console.log('이미지 로드 성공')
-                        setPastorImageLoaded(true)
-                        setPastorImageError(false)
-                        e.target.style.opacity = '1'
-                      }}
-                      onError={(e) => {
-                        console.error('이미지 로드 실패:', e)
-                        setPastorImageError(true)
-                        setPastorImageLoaded(false)
-                        e.target.style.display = 'none'
-                      }}
-                      style={{ 
-                        opacity: 0,
-                        transition: 'opacity 0.3s ease'
-                      }}
-                    />
                     {!pastorImageLoaded && !pastorImageError && (
                       <span className="pastor-photo-text">로딩 중...</span>
                     )}
                     {pastorImageError && (
                       <span className="pastor-photo-text">담임목사 사진</span>
+                    )}
+                    {pastorImageLoaded && (
+                      <img 
+                        src="/pastor-photo.jpg" 
+                        alt="담임목사"
+                        className="pastor-photo-image"
+                      />
+                    )}
+                    {!pastorImageLoaded && (
+                      <img 
+                        src="/pastor-photo.jpg" 
+                        alt="담임목사"
+                        className="pastor-photo-image"
+                        onLoad={() => {
+                          console.log('✅ 이미지 로드 성공: /pastor-photo.jpg')
+                          setPastorImageLoaded(true)
+                          setPastorImageError(false)
+                        }}
+                        onError={(e) => {
+                          console.error('❌ 이미지 로드 실패:', e.target.src)
+                          console.error('이미지 경로 확인:', window.location.origin + '/pastor-photo.jpg')
+                          setPastorImageError(true)
+                          setPastorImageLoaded(false)
+                        }}
+                        style={{ display: 'none' }}
+                      />
                     )}
                   </div>
                 </div>
