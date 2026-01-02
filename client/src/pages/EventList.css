@@ -158,12 +158,12 @@
     width: 60px;
   }
 
-  .event-list-table th:nth-child(2) {
-    width: 100px;
-  }
-
-  .event-list-table th:nth-child(4) {
-    width: 80px;
+  /* 모바일에서 날짜와 작성자 컬럼 숨기기 */
+  .event-list-table th:nth-child(2),
+  .event-list-table td:nth-child(2),
+  .event-list-table th:nth-child(4),
+  .event-list-table td:nth-child(4) {
+    display: none;
   }
 }
 
