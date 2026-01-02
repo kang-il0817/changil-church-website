@@ -18,6 +18,7 @@ import WorshipGuide from './pages/WorshipGuide'
 import NewFamilyVisit from './pages/NewFamilyVisit'
 import GalleryList from './pages/GalleryList'
 import GalleryPost from './pages/GalleryPost'
+import EventList from './pages/EventList'
 import ComingSoon from './pages/ComingSoon'
 import DonationReceipt from './pages/DonationReceipt'
 import './App.css'
@@ -127,6 +128,11 @@ function App() {
   // 갤러리 목록 페이지
   if (currentPath === '/gallery') {
     return <GalleryList />
+  }
+
+  // 행사 목록 페이지
+  if (currentPath === '/events') {
+    return <EventList />
   }
 
   // 준비중 페이지

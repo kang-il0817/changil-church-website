@@ -96,12 +96,12 @@ function EventSection() {
     document.body.style.overflow = 'unset'
   }
 
-  // 행사 목록 페이지로 이동 (갤러리 페이지로 연결)
+  // 행사 목록 페이지로 이동
   const handleViewAllClick = () => {
     if (window.navigate) {
-      window.navigate('/gallery')
+      window.navigate('/events')
     } else {
-      window.location.href = '/gallery'
+      window.location.href = '/events'
     }
   }
 
