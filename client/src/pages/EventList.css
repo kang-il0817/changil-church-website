@@ -1,15 +1,18 @@
 .event-list-page {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: white;
+  background: #ffffff;
+  padding: 4rem 2rem;
+  padding-top: 6rem;
+}
+
+/* 행사 목록 페이지에서만 navbar 그림자 제거 */
+.event-list-page .header {
+  box-shadow: none !important;
 }
 
 .event-list-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
-  flex: 1;
 }
 
 .event-list-header {
@@ -18,108 +21,149 @@
 }
 
 .event-list-title {
+  font-family: 'Pretendard', sans-serif;
   font-size: 2.5rem;
-  font-weight: normal;
-  color: #092f54;
-  margin: 0 0 0.5rem 0;
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 0 1rem 0;
 }
 
 .event-list-description {
-  text-align: center;
-  color: #718096;
+  font-family: 'Pretendard', sans-serif;
   font-size: 1.1rem;
+  color: #718096;
   margin: 0;
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
 }
 
-.event-list-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
+.event-list-table-container {
+  overflow-x: auto;
   margin-top: 2rem;
 }
 
-.event-list-item {
-  position: relative;
+.event-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-  background: white;
 }
 
-.event-list-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+.event-list-table thead {
+  background: #ffffff;
+  color: #2d3748;
 }
 
-.event-list-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-}
-
-.event-list-title-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-  padding: 1.5rem;
-  color: white;
-}
-
-.event-list-item-title {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.2rem;
+.event-list-table th {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 1rem;
   font-weight: 600;
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  padding: 1rem 1.5rem;
+  text-align: left;
+  border-bottom: 2px solid #e2e8f0;
 }
 
-.event-list-item-date {
-  margin: 0;
-  font-size: 0.9rem;
-  opacity: 0.9;
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+.event-list-table th:first-child {
+  width: 80px;
+  text-align: center;
+}
+
+.event-list-table th:nth-child(2) {
+  width: 150px;
+}
+
+.event-list-table th:nth-child(3) {
+  width: auto;
+}
+
+.event-list-table th:nth-child(4) {
+  width: 120px;
+  text-align: center;
+}
+
+.event-list-table-row {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.event-list-table-row:hover {
+  background-color: #f7fafc;
+}
+
+.event-list-table-row:last-child {
+  border-bottom: none;
+}
+
+.event-list-table td {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 0.95rem;
+  padding: 1rem 1.5rem;
+  color: #2d3748;
+}
+
+.event-list-table-number {
+  text-align: center;
+  color: #718096;
+  font-weight: 500;
+}
+
+.event-list-table-date {
+  color: #4a5568;
+}
+
+.event-list-table-title {
+  font-weight: 500;
+  color: #2d3748;
+}
+
+.event-list-table-author {
+  text-align: center;
+  color: #718096;
 }
 
 .event-list-empty {
   text-align: center;
-  padding: 4rem;
+  padding: 4rem 2rem;
   color: #718096;
-  font-size: 1.2rem;
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-family: 'Pretendard', sans-serif;
 }
 
 .loading {
   text-align: center;
-  padding: 4rem;
+  padding: 4rem 2rem;
   color: #718096;
-  font-size: 1.2rem;
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-family: 'Pretendard', sans-serif;
 }
 
 @media (max-width: 768px) {
-  .event-list-container {
-    padding: 1rem;
+  .event-list-page {
+    padding: 2rem 1rem;
   }
-  
+
   .event-list-title {
     font-size: 2rem;
   }
-  
-  .event-list-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-}
 
-@media (max-width: 480px) {
-  .event-list-grid {
-    grid-template-columns: 1fr;
+  .event-list-table {
+    font-size: 0.85rem;
+  }
+
+  .event-list-table th,
+  .event-list-table td {
+    padding: 0.75rem 1rem;
+  }
+
+  .event-list-table th:first-child {
+    width: 60px;
+  }
+
+  .event-list-table th:nth-child(2) {
+    width: 100px;
+  }
+
+  .event-list-table th:nth-child(4) {
+    width: 80px;
   }
 }
 

@@ -58,38 +58,40 @@ function EventList() {
           <p className="event-list-description">함께하면 더욱 행복합니다</p>
         </div>
         
-        <div className="event-list-grid">
+        <div className="event-list-table-container">
           {events.length > 0 ? (
-            events.map((event, index) => (
-              <div 
-                key={event._id || index}
-                className="event-list-item"
-                onClick={() => handleEventClick(event)}
-              >
-                <img 
-                  src={event.imageUrl} 
-                  alt={event.title || `행사 포스터 ${index + 1}`}
-                  className="event-list-image"
-                  onError={(e) => {
-                    e.target.src = 'https://via.placeholder.com/400x600?text=No+Image'
-                  }}
-                />
-                {event.title && (
-                  <div className="event-list-title-overlay">
-                    <h3 className="event-list-item-title">{event.title}</h3>
-                    {event.eventDate && (
-                      <p className="event-list-item-date">
-                        {new Date(event.eventDate).toLocaleDateString('ko-KR', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric'
-                        })}
-                      </p>
-                    )}
-                  </div>
-                )}
-              </div>
-            ))
+            <table className="event-list-table">
+              <thead>
+                <tr>
+                  <th>번호</th>
+                  <th>날짜</th>
+                  <th>제목</th>
+                  <th>작성자</th>
+                </tr>
+              </thead>
+              <tbody>
+                {events.map((event, index) => (
+                  <tr 
+                    key={event._id || index}
+                    onClick={() => handleEventClick(event)}
+                    className="event-list-table-row"
+                  >
+                    <td className="event-list-table-number">{events.length - index}</td>
+                    <td className="event-list-table-date">
+                      {event.eventDate 
+                        ? new Date(event.eventDate).toLocaleDateString('ko-KR', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                          })
+                        : '-'}
+                    </td>
+                    <td className="event-list-table-title">{event.title || '제목 없음'}</td>
+                    <td className="event-list-table-author">관리자</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           ) : (
             <div className="event-list-empty">
               <p>등록된 행사가 없습니다.</p>
