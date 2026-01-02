@@ -132,12 +132,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    pointer-events: none;
   }
   
   .event-poster-item.event-poster-active {
     position: relative;
     opacity: 1;
     transform: translateX(-50%);
+    pointer-events: auto;
+    z-index: 10;
   }
   
   .event-poster-first {

@@ -139,7 +139,15 @@ function EventSection() {
                 <div 
                   key={event._id || index} 
                   className={`event-poster-item ${index === 0 ? 'event-poster-first' : 'event-poster-other'} ${index === currentIndex ? 'event-poster-active' : ''}`}
-                  onClick={() => openModal(event)}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    openModal(event)
+                  }}
+                  style={{ 
+                    pointerEvents: index === currentIndex ? 'auto' : 'none',
+                    zIndex: index === currentIndex ? 10 : 1
+                  }}
                 >
                   <img 
                     src={event.imageUrl} 
