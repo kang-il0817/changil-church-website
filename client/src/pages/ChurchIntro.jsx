@@ -100,17 +100,20 @@ function ChurchIntro() {
                     <img 
                       src="/pastor-photo.png" 
                       alt="담임목사"
-                      onLoad={() => {
+                      onLoad={(e) => {
+                        console.log('이미지 로드 성공')
                         setPastorImageLoaded(true)
                         setPastorImageError(false)
+                        e.target.style.opacity = '1'
                       }}
                       onError={(e) => {
                         console.error('이미지 로드 실패:', e)
                         setPastorImageError(true)
                         setPastorImageLoaded(false)
+                        e.target.style.display = 'none'
                       }}
                       style={{ 
-                        opacity: pastorImageLoaded ? 1 : 0,
+                        opacity: 0,
                         transition: 'opacity 0.3s ease'
                       }}
                     />

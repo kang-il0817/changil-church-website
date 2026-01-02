@@ -162,6 +162,7 @@
   top: 0;
   left: 0;
   z-index: 2;
+  background: transparent;
 }
 
 .pastor-photo-text {
