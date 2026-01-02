@@ -6,6 +6,8 @@ import './ChurchIntro.css'
 function ChurchIntro() {
   const [activeTab, setActiveTab] = useState('pastor') // 기본: 담임목사 인사
   const [openItem, setOpenItem] = useState(null) // 열린 교회 유형 항목
+  const [pastorImageLoaded, setPastorImageLoaded] = useState(false)
+  const [pastorImageError, setPastorImageError] = useState(false)
 
   const tabs = [
     { id: 'pastor', label: '담임목사 인사' },
@@ -95,7 +97,19 @@ function ChurchIntro() {
                 </div>
                 <div className="pastor-photo-container">
                   <div className="pastor-photo-placeholder">
-                    <img src="/pastor-photo.png" alt="담임목사" />
+                    <img 
+                      src="/pastor-photo.png" 
+                      alt="담임목사"
+                      onLoad={() => setPastorImageLoaded(true)}
+                      onError={() => setPastorImageError(true)}
+                      style={{ display: pastorImageLoaded ? 'block' : 'none' }}
+                    />
+                    {!pastorImageLoaded && !pastorImageError && (
+                      <span className="pastor-photo-text">로딩 중...</span>
+                    )}
+                    {pastorImageError && (
+                      <span className="pastor-photo-text">담임목사 사진</span>
+                    )}
                   </div>
                 </div>
               </div>
