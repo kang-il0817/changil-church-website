@@ -1,10 +1,10 @@
 const GalleryPost = require('../models/GalleryPost');
 
-// 모든 갤러리 포스트 가져오기 (목록용)
+// 모든 갤러리 포스트 가져오기 (목록용) - 게시 순서대로 정렬 (최신순)
 exports.getAllGalleryPosts = async (req, res) => {
   try {
     const posts = await GalleryPost.find({ isActive: true })
-      .sort({ date: -1, order: 1 });
+      .sort({ createdAt: -1 }); // 생성 날짜 기준 최신순
     
     res.json(posts);
   } catch (error) {
@@ -12,11 +12,11 @@ exports.getAllGalleryPosts = async (req, res) => {
   }
 };
 
-// 최신 포스트만 가져오기 (메인 페이지용 - 첫 번째 사진과 제목)
+// 최신 포스트만 가져오기 (메인 페이지용 - 첫 번째 사진과 제목) - 게시 순서대로 정렬
 exports.getLatestGalleryPosts = async (req, res) => {
   try {
     const posts = await GalleryPost.find({ isActive: true })
-      .sort({ date: -1, order: 1 })
+      .sort({ createdAt: -1 }) // 생성 날짜 기준 최신순
       .limit(3); // 최대 3개
     
     res.json(posts);
