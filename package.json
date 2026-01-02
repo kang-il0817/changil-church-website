@@ -1,0 +1,15 @@
+{
+  "name": "changilweb",
+  "version": "1.0.0",
+  "description": "Changil Church Website",
+  "private": true,
+  "scripts": {
+    "start": "cd server && node src/server.js",
+    "heroku-postbuild": "echo 'Build complete'"
+  },
+  "engines": {
+    "node": "18.x",
+    "npm": "9.x"
+  }
+}
+
