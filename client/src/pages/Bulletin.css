@@ -1,0 +1,230 @@
+.bulletin-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f7fafc;
+}
+
+.bulletin-container {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  width: 100%;
+}
+
+.bulletin-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #092f54;
+  margin: 0 0 3rem 0;
+  text-align: center;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.bulletin-latest-container {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.bulletin-latest-images {
+  cursor: pointer;
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.bulletin-latest-images:hover {
+  transform: scale(1.01);
+}
+
+.bulletin-latest-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-height: 600px;
+  object-fit: contain;
+}
+
+.bulletin-latest-pdf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background: #f7fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  min-height: 300px;
+}
+
+.bulletin-latest-pdf svg {
+  color: #e53e3e;
+  margin-bottom: 1rem;
+}
+
+.bulletin-latest-pdf p {
+  margin: 0;
+  color: #4a5568;
+  font-size: 1.1rem;
+  font-weight: 500;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.bulletin-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #718096;
+  font-size: 1.2rem;
+}
+
+.bulletin-table-container {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+.bulletin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.bulletin-table thead {
+  background: #f7fafc;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.bulletin-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 700;
+  color: #092f54;
+  font-size: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.bulletin-table th:first-child {
+  width: 80px;
+  text-align: center;
+}
+
+.bulletin-table th:nth-child(2) {
+  width: auto;
+}
+
+.bulletin-table th:nth-child(3) {
+  width: 120px;
+  text-align: center;
+}
+
+.bulletin-table th:nth-child(4) {
+  width: 120px;
+  text-align: center;
+}
+
+.bulletin-table th:nth-child(5) {
+  width: 80px;
+  text-align: center;
+}
+
+.bulletin-table-row {
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.bulletin-table-row:hover {
+  background-color: #f7fafc;
+}
+
+.bulletin-table-row:last-child {
+  border-bottom: none;
+}
+
+.bulletin-table td {
+  padding: 1rem;
+  color: #4a5568;
+  font-size: 0.95rem;
+}
+
+.bulletin-table td:first-child {
+  text-align: center;
+  color: #718096;
+}
+
+.bulletin-table-title {
+  color: #092f54;
+  font-weight: 500;
+}
+
+.bulletin-table td:nth-child(3),
+.bulletin-table td:nth-child(4),
+.bulletin-table td:nth-child(5) {
+  text-align: center;
+  color: #718096;
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #718096;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .bulletin-container {
+    padding: 2rem 1rem;
+  }
+
+  .bulletin-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .bulletin-latest-container {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+
+  .bulletin-latest-image {
+    max-height: 400px;
+  }
+
+  .bulletin-latest-pdf {
+    min-height: 200px;
+    padding: 2rem 1rem;
+  }
+
+  .bulletin-table-container {
+    padding: 1rem;
+  }
+
+  .bulletin-table {
+    font-size: 0.85rem;
+  }
+
+  .bulletin-table th,
+  .bulletin-table td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .bulletin-table th:nth-child(3),
+  .bulletin-table th:nth-child(4),
+  .bulletin-table th:nth-child(5),
+  .bulletin-table td:nth-child(3),
+  .bulletin-table td:nth-child(4),
+  .bulletin-table td:nth-child(5) {
+    display: none;
+  }
+}
+

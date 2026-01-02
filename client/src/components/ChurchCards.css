@@ -1,0 +1,185 @@
+.church-cards {
+  background: white;
+  padding: 4rem 0;
+}
+
+.church-intro-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.section-header {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.section-header.fade-in-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.church-intro-title {
+  font-size: 2rem !important;
+  font-weight: normal;
+  color: #092f54;
+  margin: 0 0 0.5rem 0 !important;
+  text-align: center;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.section-description {
+  text-align: center;
+  color: #718096;
+  font-size: 1.1rem;
+  margin: 0 0 3rem 0 !important;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.title-bold {
+  font-weight: 900;
+}
+
+.title-light {
+  font-weight: 100;
+   /* 얇게 */
+}
+
+.church-intro-items {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.church-intro-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+  min-width: 120px;
+}
+
+.church-intro-item:hover {
+  transform: translateY(-4px);
+}
+
+.church-intro-icon {
+  width: 80px;
+  height: 80px;
+  color: #2d3748;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.church-intro-item:hover .church-intro-icon {
+  color: #667eea;
+  transform: scale(1.1);
+}
+
+.church-intro-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(20%) sepia(8%) saturate(1000%) hue-rotate(180deg) brightness(95%) contrast(90%);
+  transition: filter 0.3s;
+}
+
+.church-intro-item:hover .church-intro-icon img {
+  filter: brightness(0) saturate(100%) invert(40%) sepia(90%) saturate(2000%) hue-rotate(230deg) brightness(95%) contrast(90%);
+}
+
+.church-intro-icon-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2d3748;
+  background: #f7fafc;
+  border-radius: 50%;
+}
+
+.church-intro-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #4a5568;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  transition: color 0.3s;
+}
+
+.church-intro-item:hover .church-intro-label {
+  color: #2d3748;
+}
+
+@media (max-width: 968px) {
+  .church-intro-items {
+    gap: 2rem;
+  }
+  
+  .church-intro-icon {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .church-intro-label {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .church-cards {
+    padding: 3rem 0;
+  }
+  
+  .church-intro-container {
+    padding: 0 1rem;
+  }
+  
+  .church-intro-title {
+    font-size: 1.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .church-intro-items {
+    gap: 1.5rem;
+  }
+  
+  .church-intro-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .church-intro-label {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .church-intro-items {
+    gap: 1rem;
+  }
+  
+  .church-intro-item {
+    min-width: 100px;
+  }
+  
+  .church-intro-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .church-intro-label {
+    font-size: 0.85rem;
+  }
+}

@@ -1,0 +1,150 @@
+.new-family-visit-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f7fafc;
+  overflow-x: hidden;
+}
+
+.new-family-visit-container {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  width: 100%;
+}
+
+.new-family-visit-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #092f54;
+  margin: 0 0 3rem 0;
+  text-align: center;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.new-family-visit-content {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-wrapper {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  background: white;
+}
+
+.google-form-iframe {
+  width: 100%;
+  min-height: 2500px;
+  height: 2500px;
+  border: none;
+  display: block;
+  overflow: hidden;
+}
+
+.form-info-container {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.form-info-message {
+  background: #f0f9ff;
+  border: 2px solid #0ea5e9;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-icon {
+  color: #0ea5e9;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.form-info-message h3 {
+  color: #092f54;
+  font-size: 1.75rem;
+  margin: 0 0 1rem 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-weight: 700;
+}
+
+.form-info-message p {
+  color: #4a5568;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0.75rem 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.open-form-button {
+  background: #092f54;
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  margin-top: 1.5rem;
+}
+
+.open-form-button:hover {
+  background: #0a3d6b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(9, 47, 84, 0.3);
+}
+
+@media (max-width: 768px) {
+  .new-family-visit-container {
+    padding: 2rem 1rem;
+  }
+
+  .new-family-visit-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .new-family-visit-content {
+    padding: 1rem;
+  }
+
+  .google-form-iframe {
+    min-height: 2200px;
+    height: 2200px;
+  }
+
+  .form-info-container {
+    padding: 2rem 1rem;
+  }
+
+  .form-info-message {
+    padding: 2rem 1.5rem;
+  }
+
+  .form-info-message h3 {
+    font-size: 1.5rem;
+  }
+
+  .form-info-message p {
+    font-size: 0.95rem;
+  }
+
+  .form-icon {
+    margin-bottom: 1rem;
+  }
+
+  .form-icon svg {
+    width: 48px;
+    height: 48px;
+  }
+}
+

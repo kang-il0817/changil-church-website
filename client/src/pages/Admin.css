@@ -1,0 +1,944 @@
+.admin-page {
+  min-height: 100vh;
+  background: #f7fafc;
+  padding: 2rem 0;
+}
+
+.admin-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-header-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.admin-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2d3748;
+  margin: 0;
+  text-align: left;
+}
+
+.back-to-main-button {
+  background: #667eea;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  border: none;
+  font-size: 1rem;
+}
+
+.back-to-main-button:hover {
+  background: #5568d3;
+}
+
+.admin-tab-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.admin-tab-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  border: 2px solid transparent;
+}
+
+.admin-tab-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  border-color: #667eea;
+}
+
+.admin-tab-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.admin-tab-card h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 0 0.5rem 0;
+}
+
+.admin-tab-card p {
+  font-size: 1rem;
+  color: #718096;
+  margin: 0;
+}
+
+.message {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.message.success {
+  background: #c6f6d5;
+  color: #22543d;
+  border: 1px solid #9ae6b4;
+}
+
+.message.error {
+  background: #fed7d7;
+  color: #742a2a;
+  border: 1px solid #fc8181;
+}
+
+.message.warning {
+  background: #feebc8;
+  color: #7c2d12;
+  border: 1px solid #f6ad55;
+}
+
+/* 관리자 레이아웃 */
+.admin-layout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.admin-sidebar {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+  position: sticky;
+  top: 2rem;
+}
+
+.admin-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-menu-item {
+  background: transparent;
+  border: none;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #4a5568;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: left;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.admin-menu-item:hover {
+  background: #f7fafc;
+  color: #092f54;
+}
+
+.admin-menu-item.active {
+  background: #667eea;
+  color: white;
+  font-weight: 600;
+}
+
+.admin-main-content {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-height: 600px;
+}
+
+.admin-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.admin-form-section,
+.admin-list-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.admin-form-section h2,
+.admin-list-section h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+}
+
+.sermon-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s;
+}
+
+.form-group input[type="file"] {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.form-group input[type="file"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.form-group small {
+  color: #718096;
+  font-size: 0.85rem;
+}
+
+.submit-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4);
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.sermon-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sermon-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  background: #f7fafc;
+}
+
+.sermon-item-header h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #667eea;
+  margin-bottom: 1rem;
+}
+
+.sermon-item-content {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.sermon-item-list {
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 6px;
+  transition: all 0.3s;
+  border: 2px solid transparent;
+}
+
+.sermon-item-list:hover {
+  background: #f7fafc;
+  border-color: #667eea;
+}
+
+.sermon-item-list.editing {
+  background: #e6f2ff;
+  border-color: #667eea;
+}
+
+.sermon-item-simple {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.sermon-item-type {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #667eea;
+  min-width: 100px;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.sermon-item-date {
+  font-size: 1rem;
+  color: #4a5568;
+  flex: 1;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.sermon-thumbnail-small {
+  width: 200px;
+  height: 112px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.sermon-item-info {
+  flex: 1;
+}
+
+.sermon-item-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.sermon-item-info h4 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.sermon-item-desc {
+  color: #718096;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.youtube-link {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.youtube-link:hover {
+  text-decoration: underline;
+}
+
+.delete-button {
+  background: #e53e3e;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.delete-button:hover {
+  background: #c53030;
+}
+
+.sermon-empty {
+  padding: 2rem;
+  text-align: center;
+  color: #a0aec0;
+}
+
+/* 연말정산 신청 관리 */
+.donation-receipt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.donation-receipt-item {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.donation-receipt-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.donation-receipt-type-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: #e6fffa;
+  color: #234e52;
+}
+
+.donation-receipt-status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.donation-receipt-status-badge[data-status="대기"] {
+  background: #fed7d7;
+  color: #742a2a;
+}
+
+.donation-receipt-status-badge[data-status="처리중"] {
+  background: #feebc8;
+  color: #7c2d12;
+}
+
+.donation-receipt-status-badge[data-status="완료"] {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.donation-receipt-status-badge[data-status="거부"] {
+  background: #e2e8f0;
+  color: #4a5568;
+}
+
+.donation-receipt-date {
+  font-size: 0.85rem;
+  color: #718096;
+  margin-left: auto;
+}
+
+.donation-receipt-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.donation-receipt-info-row {
+  font-size: 0.9rem;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.donation-receipt-info-row strong {
+  color: #2d3748;
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.file-link {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.file-link:hover {
+  text-decoration: underline;
+}
+
+.donation-receipt-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.status-select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  cursor: pointer;
+  background: white;
+  color: #2d3748;
+}
+
+.status-select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+@media (max-width: 768px) {
+  .donation-receipt-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .donation-receipt-date {
+    margin-left: 0;
+  }
+
+  .donation-receipt-actions {
+    flex-direction: column;
+  }
+
+  .status-select {
+    width: 100%;
+  }
+}
+
+.admin-section-divider {
+  margin: 4rem 0;
+  border-top: 2px solid #e2e8f0;
+}
+
+.admin-footer {
+  text-align: center;
+  padding-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.home-button {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.home-button:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.logout-button {
+  background: #e53e3e;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.logout-button:hover {
+  background: #c53030;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(229, 62, 62, 0.3);
+}
+
+.back-link {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* 이미지 업로드 관련 스타일 */
+.upload-progress {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: #f7fafc;
+  border-radius: 6px;
+  position: relative;
+}
+
+.upload-progress-bar {
+  height: 4px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+
+.upload-progress span {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #4a5568;
+}
+
+/* 여러 파일 업로드 진행률 */
+.upload-progress-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.upload-progress-item {
+  padding: 0.75rem;
+  background: #f7fafc;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.upload-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.upload-file-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #2d3748;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 0.5rem;
+}
+
+.upload-progress-text {
+  font-size: 0.85rem;
+  color: #667eea;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* 이미지 미리보기 (단일) */
+.image-preview {
+  margin-top: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  border: 2px solid #e2e8f0;
+  display: block;
+}
+
+/* 여러 이미지 미리보기 */
+.image-preview-container {
+  margin-top: 1rem;
+}
+
+.image-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.image-preview-item {
+  position: relative;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+  transition: border-color 0.3s;
+}
+
+.image-preview-item:hover {
+  border-color: #667eea;
+}
+
+.image-preview-item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+}
+
+.image-preview-info {
+  padding: 0.5rem;
+  background: #f7fafc;
+}
+
+.image-preview-name {
+  display: block;
+  font-size: 0.75rem;
+  color: #4a5568;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 0.5rem;
+}
+
+.remove-preview-button {
+  width: 100%;
+  padding: 0.4rem 0.75rem;
+  background: #e53e3e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.remove-preview-button:hover:not(:disabled) {
+  background: #c53030;
+}
+
+.remove-preview-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.clear-all-button {
+  padding: 0.5rem 1rem;
+  background: #718096;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.clear-all-button:hover:not(:disabled) {
+  background: #4a5568;
+}
+
+.clear-all-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cancel-edit-button {
+  background: #718096;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-bottom: 1rem;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.cancel-edit-button:hover {
+  background: #4a5568;
+}
+
+/* 페이지네이션 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding: 1rem 0;
+}
+
+.pagination-button {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.pagination-button:hover:not(:disabled) {
+  background: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.pagination-button:disabled {
+  background: #cbd5e0;
+  color: #a0aec0;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.pagination-info {
+  font-size: 1rem;
+  color: #4a5568;
+  font-weight: 500;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  min-width: 80px;
+  text-align: center;
+}
+
+/* PDF 미리보기 */
+.pdf-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: #f7fafc;
+  border: 2px dashed #cbd5e0;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.pdf-preview svg {
+  color: #e53e3e;
+  margin-bottom: 0.5rem;
+}
+
+.pdf-preview p {
+  margin: 0.25rem 0;
+  color: #4a5568;
+  font-size: 0.9rem;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.pdf-preview .file-size {
+  color: #718096;
+  font-size: 0.85rem;
+}
+
+.add-section-button {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.add-section-button:hover {
+  background: #5568d3;
+}
+
+.section-editor {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 968px) {
+  .admin-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .admin-sidebar {
+    position: static;
+    padding: 1rem;
+  }
+
+  .admin-menu {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .admin-menu-item {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .admin-main-content {
+    padding: 1.5rem;
+  }
+
+  .admin-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .sermon-item-content {
+    flex-direction: column;
+  }
+  
+  .sermon-thumbnail-small {
+    width: 100%;
+    height: auto;
+  }
+
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-title {
+    font-size: 2rem;
+    text-align: left;
+  }
+
+  .admin-tab-selector {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .admin-tab-card {
+    padding: 2rem 1.5rem;
+  }
+}
+

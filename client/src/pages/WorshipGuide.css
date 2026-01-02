@@ -1,0 +1,347 @@
+.worship-guide-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+}
+
+.worship-guide-page .offering-content {
+  background: #ffffff;
+  min-height: calc(100vh - 200px);
+  padding: 4rem 2rem;
+  margin: 0 -2rem 0 -2rem;
+  border-radius: 0;
+  width: calc(100% + 4rem);
+  box-sizing: border-box;
+}
+
+.worship-guide-container {
+  flex: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  width: 100%;
+}
+
+.worship-guide-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.worship-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.worship-tab {
+  background: none;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #718096;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  position: relative;
+  margin-bottom: -2px;
+}
+
+.worship-tab:hover {
+  color: #0a3874;
+}
+
+.worship-tab.active {
+  color: #0a3874;
+  font-weight: 700;
+}
+
+.worship-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #0a3874;
+}
+
+.worship-guide-title-icon {
+  width: 12px;
+  height: 12px;
+  background: #0a3874;
+  flex-shrink: 0;
+}
+
+.worship-guide-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0a3874;
+  margin: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.worship-guide-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.worship-section {
+  margin-bottom: 0;
+}
+
+.worship-section-title {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #0a3874;
+  margin: 0 0 0.75rem 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.worship-section-title.blue {
+  color: #0a3874;
+}
+
+.worship-section-title.orange {
+  color: #ff6b35;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.worship-section-details {
+  margin-bottom: 1.5rem;
+}
+
+.worship-time-location {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.worship-time {
+  color: #000000;
+  font-size: 1rem;
+  line-height: 1.65
+  ;
+  font-weight: 700;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.worship-location {
+  color: #000000;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 700;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.worship-description {
+  margin: 0.75rem 0 0 0;
+}
+
+.worship-description-paragraph {
+  color: #000000;
+  font-size: 1rem;
+  line-height: 1.8;
+  margin: 0;
+  font-weight: 300;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.worship-description-paragraph + .worship-description-paragraph {
+  margin-top: 0.1rem;
+}
+
+.worship-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 2rem 0;
+  width: 100%;
+}
+
+/* 헌금안내 스타일 */
+.offering-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.offering-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0a3874;
+  margin: 0 0 2rem 0;
+  text-align: center;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.offering-description {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.offering-description p {
+  color: #0a3874;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin: 0.5rem 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-weight: 300;
+}
+
+.offering-accounts {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.offering-account-box {
+  background: #f7fafc;
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+}
+
+.offering-account-type {
+  color: #0a3874;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.offering-account-note {
+  color: #718096;
+  font-size: 0.95rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-style: italic;
+}
+
+.offering-account-label {
+  color: #0a3874;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.offering-account-number {
+  color: #0a3874;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.offering-copy-button {
+  background: #ffffff;
+  border: 1px solid #0a3874;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  color: #0a3874;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.offering-copy-button:hover {
+  background: #0a3874;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(10, 56, 116, 0.3);
+}
+
+.offering-copy-button svg {
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .worship-guide-container {
+    padding: 3rem 1.5rem;
+  }
+
+  .worship-guide-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .worship-guide-title {
+    font-size: 1.75rem;
+  }
+
+  .worship-tabs {
+    margin-bottom: 2rem;
+  }
+
+  .worship-tab {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+  }
+
+  .worship-section-title {
+    font-size: 1.15rem;
+  }
+
+  .worship-time,
+  .worship-location,
+  .worship-description {
+    font-size: 0.95rem;
+  }
+
+  .worship-divider {
+    margin: 1.5rem 0;
+  }
+
+  .offering-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .offering-description {
+    margin-bottom: 2rem;
+  }
+
+  .offering-description p {
+    font-size: 1rem;
+  }
+
+  .offering-accounts {
+    gap: 1.5rem;
+  }
+
+  .offering-account-box {
+    padding: 2rem 1.5rem;
+  }
+
+  .offering-account-type {
+    font-size: 1.1rem;
+  }
+
+  .offering-account-number {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .offering-copy-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+  }
+}
+

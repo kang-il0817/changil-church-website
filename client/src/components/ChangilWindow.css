@@ -1,0 +1,353 @@
+.changil-window {
+  background: white;
+  padding: 4rem 0;
+}
+
+.changil-window-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-header {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.section-header.fade-in-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: normal;
+  color: #092f54;
+  margin: 0 0 0.5rem 0;
+  text-align: center;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.title-bold {
+  font-weight: 900;
+}
+
+.title-light {
+  font-weight: 100;
+}
+
+.section-description {
+  text-align: center;
+  color: #718096;
+  font-size: 1.1rem;
+  margin: 0 0 3rem 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.window-images {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.window-image-item {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+
+.window-image-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.window-image-title-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.window-image-item:hover .window-image-title-overlay {
+  opacity: 1;
+}
+
+.window-image-title-text {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.window-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.window-image-placeholder {
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem;
+  color: #718096;
+  font-size: 1.2rem;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+@media (max-width: 968px) {
+  .window-images {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 이미지 모달 스타일 */
+.image-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.image-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.image-modal-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 3rem;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s, opacity 0.3s;
+  z-index: 1001;
+  line-height: 1;
+  padding: 0;
+}
+
+.image-modal-close:hover {
+  transform: scale(1.2);
+  opacity: 0.8;
+}
+
+.image-modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 3rem;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.3s, transform 0.3s;
+  z-index: 1001;
+  line-height: 1;
+  padding: 0;
+}
+
+.image-modal-nav:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.image-modal-prev {
+  left: -70px;
+}
+
+.image-modal-next {
+  right: -70px;
+}
+
+.image-modal-image-container {
+  max-width: 100%;
+  max-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.image-modal-image {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.image-modal-info {
+  text-align: center;
+  color: white;
+  max-width: 800px;
+  padding: 0 1rem;
+}
+
+.image-modal-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: white;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.image-modal-description {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.image-modal-counter {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 0.9rem;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+@media (max-width: 768px) {
+  .changil-window {
+    padding: 3rem 0;
+  }
+  
+  .changil-window-container {
+    padding: 0 1rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .window-images {
+    grid-template-columns: 1fr;
+  }
+
+  /* 모바일 모달 스타일 */
+  .image-modal-overlay {
+    padding: 1rem;
+  }
+
+  .image-modal-content {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .image-modal-close {
+    top: 10px;
+    right: 10px;
+    font-size: 2rem;
+    width: 35px;
+    height: 35px;
+  }
+
+  .image-modal-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 2rem;
+  }
+
+  .image-modal-prev {
+    left: 10px;
+  }
+
+  .image-modal-next {
+    right: 10px;
+  }
+
+  .image-modal-image-container {
+    max-height: 70vh;
+  }
+
+  .image-modal-image {
+    max-height: 70vh;
+  }
+
+  .image-modal-title {
+    font-size: 1.2rem;
+  }
+
+  .image-modal-description {
+    font-size: 0.9rem;
+  }
+
+  .image-modal-counter {
+    bottom: 10px;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+}

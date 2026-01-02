@@ -1,0 +1,287 @@
+.sermon-detail-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.sermon-detail-main {
+  flex: 1;
+  background: #f7fafc;
+  padding: 3rem 0;
+}
+
+.sermon-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.sermon-detail-header {
+  margin-bottom: 2rem;
+}
+
+.sermon-detail-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2d3748;
+  margin: 0 0 1rem 0;
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.sermon-detail-meta-top {
+  display: flex;
+  gap: 1rem;
+  color: #718096;
+  font-size: 0.95rem;
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.sermon-video-wrapper {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sermon-video-container {
+  width: 100%;
+}
+
+.sermon-video-iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+}
+
+.sermon-video-links {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.youtube-link-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #e53e3e;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.3s;
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.youtube-link-button:hover {
+  background: #c53030;
+}
+
+.sermon-video-error {
+  padding: 4rem 2rem;
+  text-align: center;
+  color: #718096;
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.sermon-info-box {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: 12% 10% 45% 18%;
+  gap: 1.5rem;
+}
+
+.sermon-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sermon-info-label {
+  font-size: 0.9rem;
+  color: #718096;
+  font-weight: 500;
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.sermon-info-value {
+  font-size: 1rem;
+  color: #2d3748;
+  font-weight: 500;
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.sermon-info-item:nth-child(2) {
+  min-width: 100px;
+}
+
+.sermon-info-item:nth-child(3) {
+  min-width: 0;
+}
+
+.sermon-info-item:nth-child(3) .sermon-info-value {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sermon-list-section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sermon-list-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2d3748;
+  margin: 0 0 1.5rem 0;
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.sermon-table-wrapper {
+  overflow-x: auto;
+}
+
+.sermon-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.sermon-table thead {
+  background: #f7fafc;
+}
+
+.sermon-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #4a5568;
+  border-bottom: 2px solid #e2e8f0;
+  font-size: 0.9rem;
+}
+
+.sermon-table th:nth-child(1) {
+  width: 5%;
+}
+
+.sermon-table th:nth-child(2) {
+  width: 12%;
+}
+
+.sermon-table th:nth-child(3) {
+  width: 10%;
+}
+
+.sermon-table th:nth-child(4) {
+  width: 45%;
+}
+
+.sermon-table th:nth-child(5) {
+  width: 18%;
+}
+
+.sermon-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #2d3748;
+  font-size: 0.95rem;
+}
+
+.sermon-table td:nth-child(3) {
+  white-space: nowrap;
+}
+
+.sermon-table td:nth-child(4) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sermon-table tbody tr {
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.sermon-table tbody tr:hover {
+  background: #f7fafc;
+}
+
+.sermon-table tbody tr.active {
+  background: #edf2f7;
+  font-weight: 500;
+}
+
+.sermon-table-title {
+  color: #667eea;
+  font-weight: 500;
+}
+
+.sermon-not-found {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #718096;
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.back-button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.back-button:hover {
+  background: #764ba2;
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem;
+  color: #718096;
+  font-size: 1.2rem;
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+@media (max-width: 768px) {
+  .sermon-detail-container {
+    padding: 0 1rem;
+  }
+  
+  .sermon-detail-title {
+    font-size: 1.5rem;
+  }
+  
+  .sermon-info-box {
+    grid-template-columns: 1fr;
+  }
+  
+  .sermon-info-item:nth-child(3) .sermon-info-value {
+    white-space: normal;
+  }
+  
+  .sermon-table {
+    font-size: 0.85rem;
+  }
+  
+  .sermon-table th,
+  .sermon-table td {
+    padding: 0.75rem 0.5rem;
+  }
+}
+
+

@@ -1,0 +1,67 @@
+.coming-soon-page {
+  min-height: 100vh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.coming-soon-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+}
+
+.coming-soon-content {
+  text-align: center;
+  max-width: 600px;
+}
+
+.coming-soon-title {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 0 1rem 0;
+}
+
+.coming-soon-message {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 1.5rem;
+  color: #718096;
+  margin: 0 0 3rem 0;
+}
+
+.coming-soon-button {
+  font-family: 'Pretendard', sans-serif;
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.coming-soon-button:hover {
+  background: #5568d3;
+}
+
+@media (max-width: 768px) {
+  .coming-soon-title {
+    font-size: 2rem;
+  }
+
+  .coming-soon-message {
+    font-size: 1.2rem;
+  }
+
+  .coming-soon-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+

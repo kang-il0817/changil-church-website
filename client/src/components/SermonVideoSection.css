@@ -1,0 +1,361 @@
+.sermon-video-section {
+  background: white;
+  padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.sermon-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.sermon-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.sermon-main-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.sermon-main-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  width: 100%;
+}
+
+.sermon-featured-thumbnail {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  cursor: pointer;
+  background: #1a202c;
+}
+
+/* 설교 타입 태그 */
+.sermon-type-tag {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  white-space: nowrap;
+}
+
+.sermon-type-tag-featured {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 3;
+}
+
+.sermon-type-주일예배 {
+  background: white;
+  color: #2d3748;
+}
+
+.sermon-type-새벽기도,
+.sermon-type-새벽예배 {
+  background: rgba(139, 80, 164, 0.9);
+  color: white;
+}
+
+
+.sermon-featured-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.sermon-featured-thumbnail:hover img {
+  transform: scale(1.05);
+}
+
+.play-overlay-featured {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.sermon-featured-thumbnail:hover .play-overlay-featured {
+  opacity: 1;
+}
+
+.play-icon-featured {
+  width: 100px;
+  height: 100px;
+  background: rgba(229, 62, 62, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2.5rem;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.sermon-featured-thumbnail:hover .play-icon-featured {
+  transform: scale(1.1);
+  background: rgba(229, 62, 62, 1);
+}
+
+/* 온라인 헌금 섹션 */
+.sermon-offering-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.sermon-offering-label {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #4a5568;
+  margin-left: 1.5rem;  /* 이 줄 추가 (오른쪽으로 살짝 이동) */
+}
+
+.sermon-offering-account {
+  font-size: 1rem;
+  font-weight: 800;  /* 600에서 700으로 변경 (더 굵게) */
+  color: #4a5568;
+  margin-left: 0%;  /* 이 줄 추가 (오른쪽으로 살짝 이동) */
+}
+
+.sermon-offering-copy-button {
+  background: #675b6f;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  flex-shrink: 0;
+}
+
+.sermon-offering-copy-button:hover {
+  background: #554a5a;
+}
+
+.sermon-list {
+  background: transparent;
+  border-radius: 12px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sermon-list-item {
+  background: transparent;
+  border-radius: 8px;
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  color: #2d3748;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.sermon-list-item:last-child {
+  border-bottom: none;
+}
+
+.sermon-list-item:hover {
+  opacity: 0.7;
+}
+
+.sermon-list-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.sermon-list-title-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2d3748;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.sermon-list-description {
+  font-size: 0.85rem;
+  color: #4a5568;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.sermon-list-meta {
+  font-size: 0.75rem;
+  color: #718096;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.sermon-list-play-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  transition: background 0.3s;
+  color: #4a5568;
+}
+
+.sermon-list-item:hover .sermon-list-play-icon {
+  background: #cbd5e0;
+}
+
+/* YouTube 버튼 */
+.sermon-youtube-button {
+  background: transparent;
+  border-radius: 8px;
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: #2d3748;
+  transition: opacity 0.3s;
+  margin-top: 1rem;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.sermon-youtube-button:hover {
+  opacity: 0.7;
+  color: #2d3748;
+}
+
+.sermon-youtube-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sermon-youtube-icon-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  display: block;
+}
+
+.sermon-youtube-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4a5568;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+
+
+.sermon-empty-large,
+.sermon-empty-small {
+  padding: 4rem 2rem;
+  text-align: center;
+  color: #718096;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.sermon-empty-small {
+  padding: 2rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem;
+  color: #718096;
+  font-size: 1.2rem;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+
+@media (max-width: 968px) {
+  .sermon-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .sermon-container {
+    padding: 0 1rem;
+  }
+  
+  .play-icon-featured {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+  }
+
+  /* 모바일에서 새벽기도 섹션 숨기기 */
+  .sermon-sidebar {
+    display: none;
+  }
+
+  .sermon-layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* 모바일에서 온라인 헌금 섹션 한 줄로 표시 */
+  .sermon-offering-section {
+    flex-wrap: nowrap;
+    gap: 0.25rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .sermon-offering-label {
+    font-size: 0.85rem;
+    margin-left: 0;
+    flex-shrink: 0;
+  }
+
+  .sermon-offering-account {
+    font-size: 0.85rem;
+    margin-left: 0;
+    white-space: nowrap;
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sermon-offering-copy-button {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+}

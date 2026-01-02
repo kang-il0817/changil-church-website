@@ -1,0 +1,261 @@
+.main-banner {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-container {
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 비율 (동영상 표준 비율) */
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-slider {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.5s ease-in-out;
+}
+
+.banner-slider.single-banner {
+  transition: none; /* 배너가 1개일 때는 애니메이션 없음 */
+  transform: translateX(0) !important; /* 배너가 1개일 때는 항상 첫 번째 위치 */
+}
+
+.banner-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.banner-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* 텍스트 오버레이 */
+.banner-text-overlay {
+  position: absolute;
+  bottom: 3rem;
+  left: 3rem;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.banner-text-line {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  color: white;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  font-weight: 600;
+  opacity: 0;
+  animation: slideDownFadeIn 1.5s ease-out forwards;
+}
+
+.banner-text-line-1 {
+  font-size: 1.5rem;
+  animation-delay: 0.3s;
+}
+
+.banner-text-line-2 {
+  font-size: 2.5rem;
+  animation-delay: 0.6s;
+}
+
+/* 위에서 아래로 내려오는 애니메이션 */
+@keyframes slideDownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 네비게이션 버튼 */
+.banner-nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 2rem;
+  color: #2d3748;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  opacity: 0.7;
+}
+
+.banner-nav-button:hover {
+  background: rgba(255, 255, 255, 1);
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.banner-nav-prev {
+  left: 20px;
+}
+
+.banner-nav-next {
+  right: 20px;
+}
+
+/* 인디케이터 (점) */
+.banner-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.banner-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+  padding: 0;
+}
+
+.banner-indicator:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(1.2);
+}
+
+.banner-indicator.active {
+  background: white;
+  width: 30px;
+  border-radius: 6px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1200px) {
+  .banner-container {
+    padding-bottom: 56.25%; /* 16:9 비율 유지 */
+  }
+  
+  .banner-nav-button {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+  
+  .banner-nav-prev {
+    left: 10px;
+  }
+  
+  .banner-nav-next {
+    right: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner-container {
+    padding-bottom: 56.25%; /* 16:9 비율 유지 */
+  }
+  
+  .banner-nav-button {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+  
+  .banner-nav-prev {
+    left: 5px;
+  }
+  
+  .banner-nav-next {
+    right: 5px;
+  }
+  
+  .banner-indicators {
+    bottom: 10px;
+  }
+  
+  .banner-indicator {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .banner-indicator.active {
+    width: 25px;
+  }
+
+  .banner-text-overlay {
+    bottom: 2rem;
+    left: 2rem;
+  }
+
+  .banner-text-line-1 {
+    font-size: 1.5rem;
+  }
+
+  .banner-text-line-2 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-container {
+    padding-bottom: 56.25%; /* 16:9 비율 유지 */
+  }
+  
+  .banner-nav-button {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+  
+  .banner-indicator {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .banner-indicator.active {
+    width: 20px;
+  }
+
+  .banner-text-overlay {
+    bottom: 1.5rem;
+    left: 1.5rem;
+  }
+
+  .banner-text-line-1 {
+    font-size: 1.2rem;
+  }
+
+  .banner-text-line-2 {
+    font-size: 1rem;
+  }
+}

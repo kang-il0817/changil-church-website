@@ -1,0 +1,186 @@
+.footer {
+  background: #2d3748;
+  color: white;
+  padding: 0.5rem 0 2rem;
+  margin-top: 4rem;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footer-ministries {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.ministry-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ministry-icon {
+  font-size: 2rem;
+}
+
+.ministry-name {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.footer-quick-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 2rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 2rem;
+}
+
+.quick-link {
+  color: white;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.quick-link:hover {
+  opacity: 1;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  gap: 2rem;
+}
+
+.footer-left {
+  flex: 1;
+  text-align: left;
+}
+
+.footer-right {
+  display: flex;
+  align-items: flex-start;
+}
+
+.footer-logo {
+  margin-top: 0.4rem;
+  margin-bottom: 0.1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.footer-logo-image {
+  max-height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+.footer-logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.footer-details {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  opacity: 0.8;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.footer-details p {
+  margin-top: 0.1rem;
+  margin: 0.3rem 0;
+  font-size: 0.9rem;
+}
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.social-link {
+  color: white;
+  opacity: 0.8;
+  transition: opacity 0.3s, transform 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.social-link:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.social-link svg {
+  width: 24px;
+  height: 24px;
+}
+
+.footer-copyright {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0.6;
+  font-size: 0.8rem;
+}
+
+.admin-link {
+  color: white;
+  text-decoration: none;
+}
+
+.admin-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .footer-left {
+    text-align: center;
+  }
+  
+  .footer-logo {
+    justify-content: center;
+  }
+  
+  .footer-details {
+    text-align: center;
+  }
+  
+  .footer-right {
+    justify-content: center;
+  }
+  
+  .footer-ministries {
+    gap: 2rem;
+  }
+  
+  .footer-quick-links {
+    gap: 1rem;
+  }
+}
+

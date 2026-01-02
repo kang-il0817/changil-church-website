@@ -1,0 +1,169 @@
+.gallery-list-page {
+  min-height: 100vh;
+  background: #ffffff;
+  padding: 4rem 2rem;
+  padding-top: 6rem;
+}
+
+/* 갤러리 목록 페이지에서만 navbar 그림자 제거 */
+.gallery-list-page .header {
+  box-shadow: none !important;
+}
+
+.gallery-list-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-list-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.gallery-list-title {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 0 1rem 0;
+}
+
+.gallery-list-description {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 1.1rem;
+  color: #718096;
+  margin: 0;
+}
+
+.gallery-list-table-container {
+  overflow-x: auto;
+  margin-top: 2rem;
+}
+
+.gallery-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.gallery-list-table thead {
+  background: #ffffff;
+  color: #2d3748;
+}
+
+.gallery-list-table th {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 1rem 1.5rem;
+  text-align: left;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.gallery-list-table th:first-child {
+  width: 80px;
+  text-align: center;
+}
+
+.gallery-list-table th:nth-child(2) {
+  width: 150px;
+}
+
+.gallery-list-table th:nth-child(3) {
+  width: auto;
+}
+
+.gallery-list-table th:nth-child(4) {
+  width: 120px;
+  text-align: center;
+}
+
+.gallery-list-table-row {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.gallery-list-table-row:hover {
+  background-color: #f7fafc;
+}
+
+.gallery-list-table-row:last-child {
+  border-bottom: none;
+}
+
+.gallery-list-table td {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 0.95rem;
+  padding: 1rem 1.5rem;
+  color: #2d3748;
+}
+
+.gallery-list-table-number {
+  text-align: center;
+  color: #718096;
+  font-weight: 500;
+}
+
+.gallery-list-table-date {
+  color: #4a5568;
+}
+
+.gallery-list-table-title {
+  font-weight: 500;
+  color: #2d3748;
+}
+
+.gallery-list-table-author {
+  text-align: center;
+  color: #718096;
+}
+
+.gallery-list-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #718096;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #718096;
+  font-family: 'Pretendard', sans-serif;
+}
+
+@media (max-width: 768px) {
+  .gallery-list-page {
+    padding: 2rem 1rem;
+  }
+
+  .gallery-list-title {
+    font-size: 2rem;
+  }
+
+  .gallery-list-table {
+    font-size: 0.85rem;
+  }
+
+  .gallery-list-table th,
+  .gallery-list-table td {
+    padding: 0.75rem 1rem;
+  }
+
+  .gallery-list-table th:first-child {
+    width: 60px;
+  }
+
+  .gallery-list-table th:nth-child(2) {
+    width: 100px;
+  }
+
+  .gallery-list-table th:nth-child(4) {
+    width: 80px;
+  }
+}
+
