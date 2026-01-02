@@ -134,15 +134,29 @@
   }
 }
 
-/* 데스크탑 네비게이션 숨기기 */
-.window-navigation {
-  display: none;
+/* 목록보기 버튼 */
+.window-view-all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  padding: 1rem 0;
 }
 
-@media (max-width: 768px) {
-  .window-navigation {
-    display: flex;
-  }
+.window-view-all-button {
+  background: none;
+  border: none;
+  color: #718096;
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.3s;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  padding: 0.5rem 0;
+}
+
+.window-view-all-button:hover {
+  color: #667eea;
 }
 
 /* 이미지 모달 스타일 */
@@ -316,75 +330,16 @@
   }
   
   .window-images {
-    grid-template-columns: 1fr;
-    position: relative;
-    min-height: 300px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 
-  /* 모바일에서 현재 활성화된 이미지만 표시 */
   .window-image-item {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    width: 100%;
-    pointer-events: none;
-  }
-
-  .window-image-item.window-image-active {
     position: relative;
     opacity: 1;
-    transform: translateX(-50%);
+    transform: none;
+    width: 100%;
     pointer-events: auto;
-    z-index: 10;
-  }
-
-  /* 모바일 네비게이션 */
-  .window-navigation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1.5rem;
-    margin-top: 2rem;
-    padding: 1rem 0;
-  }
-
-  .window-nav-button {
-    background: #092f54;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    font-size: 2rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-    line-height: 1;
-    padding: 0;
-  }
-
-  .window-nav-button:hover {
-    background: #061f3a;
-    transform: scale(1.1);
-  }
-
-  .window-nav-button:active {
-    transform: scale(0.95);
-  }
-
-  .window-nav-indicator {
-    font-size: 1rem;
-    color: #4a5568;
-    font-weight: 500;
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-    min-width: 60px;
-    text-align: center;
   }
 
   /* 모바일 모달 스타일 */

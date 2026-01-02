@@ -5,7 +5,6 @@ function ChangilWindow() {
   const [posts, setPosts] = useState([]) // 갤러리 포스트들
   const [loading, setLoading] = useState(true)
   const [isVisible, setIsVisible] = useState(false)
-  const [currentIndex, setCurrentIndex] = useState(0) // 모바일 페이지네이션용
   const sectionRef = useRef(null)
 
   useEffect(() => {
@@ -82,13 +81,13 @@ function ChangilWindow() {
     }
   }
 
-  // 모바일 페이지네이션 핸들러
-  const handlePrevious = () => {
-    setCurrentIndex((prev) => (prev === 0 ? posts.length - 1 : prev - 1))
-  }
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev === posts.length - 1 ? 0 : prev + 1))
+  // 갤러리 목록 페이지로 이동
+  const handleViewAllClick = () => {
+    if (window.navigate) {
+      window.navigate('/gallery')
+    } else {
+      window.location.href = '/gallery'
+    }
   }
 
   if (loading) {
@@ -119,12 +118,8 @@ function ChangilWindow() {
               posts.map((post, index) => (
                 <div 
                   key={post._id || index} 
-                  className={`window-image-item ${index === currentIndex ? 'window-image-active' : ''}`}
+                  className="window-image-item"
                   onClick={() => handlePostClick(post._id)}
-                  style={{
-                    pointerEvents: window.innerWidth <= 768 && index !== currentIndex ? 'none' : 'auto',
-                    zIndex: window.innerWidth <= 768 && index === currentIndex ? 10 : index === 0 ? 1 : 0
-                  }}
                 >
                   <img 
                     src={post.thumbnail} 
@@ -149,24 +144,13 @@ function ChangilWindow() {
               </>
             )}
           </div>
-          {posts.length > 1 && (
-            <div className="window-navigation">
+          {posts.length > 0 && (
+            <div className="window-view-all">
               <button 
-                className="window-nav-button window-nav-prev"
-                onClick={handlePrevious}
-                aria-label="이전 이미지"
+                className="window-view-all-button"
+                onClick={handleViewAllClick}
               >
-                ‹
-              </button>
-              <span className="window-nav-indicator">
-                {currentIndex + 1} / {posts.length}
-              </span>
-              <button 
-                className="window-nav-button window-nav-next"
-                onClick={handleNext}
-                aria-label="다음 이미지"
-              >
-                ›
+                목록보기
               </button>
             </div>
           )}
