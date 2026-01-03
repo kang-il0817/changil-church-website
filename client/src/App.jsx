@@ -37,6 +37,11 @@ function App() {
       offset: 100,
     })
 
+    // AOS 초기화 후 이미 화면에 보이는 요소들을 즉시 표시
+    setTimeout(() => {
+      AOS.refresh()
+    }, 100)
+
     const handleLocationChange = () => {
       setCurrentPath(window.location.pathname)
     }
