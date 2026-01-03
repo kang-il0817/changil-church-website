@@ -44,7 +44,7 @@ function ChurchCards() {
           </h2>
           <p className="section-description">창일교회를 소개합니다</p>
         </div>
-        <div className="church-intro-items" data-aos="fade-right" data-aos-delay="200">
+        <div className="church-intro-items" data-aos="fade-down" data-aos-delay="200">
           {items.map(item => {
             const handleClick = () => {
               if (item.title === '교회소개') {

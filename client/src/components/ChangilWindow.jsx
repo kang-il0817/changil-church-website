@@ -63,7 +63,7 @@ function ChangilWindow() {
               은혜와 기쁨의 순간들을 공유합니다.
             </p>
           </div>
-          <div className="window-images" data-aos="fade-right" data-aos-delay="200">
+          <div className="window-images" data-aos="fade-down" data-aos-delay="200">
             {posts.length > 0 ? (
               posts.map((post, index) => (
                 <div 

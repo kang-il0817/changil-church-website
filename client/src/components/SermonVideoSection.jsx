@@ -61,9 +61,8 @@ function SermonVideoSection() {
   }
 
   return (
-    <section className="sermon-video-section" data-aos="fade-up">
-      <div className="sermon-container">
-        <div className="sermon-layout" data-aos="fade-left">
+    <section className="sermon-video-section">
+      <div className="sermon-container" data-aos="fade-down">
           {/* 왼쪽: 주일예배 큰 썸네일 */}
           <div className="sermon-main-wrapper">
             <div className="sermon-main-card">

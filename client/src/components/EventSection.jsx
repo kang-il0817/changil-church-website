@@ -83,7 +83,7 @@ function EventSection() {
             </h2>
             <p className="section-description">함께하면 더욱 행복합니다</p>
           </div>
-          <div className="event-posters-wrapper" data-aos="fade-left" data-aos-delay="200">
+          <div className="event-posters-wrapper" data-aos="fade-down" data-aos-delay="200">
             <div className="event-posters">
               {displayEvents.map((event, index) => (
                 <div 
