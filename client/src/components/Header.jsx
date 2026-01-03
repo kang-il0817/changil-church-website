@@ -157,13 +157,6 @@ function Header() {
           <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
             <div className="mobile-menu-header">
               <h3>메뉴</h3>
-              <button 
-                className="mobile-menu-close"
-                onClick={handleMobileMenuClick}
-                aria-label="메뉴 닫기"
-              >
-                ×
-              </button>
             </div>
             <div className="mobile-menu-items">
               <button 
@@ -206,7 +199,7 @@ function Header() {
                 className="mobile-menu-item"
                 onClick={() => handleMobileMenuItemClick(null, 'together')}
               >
-                시역 | 행사
+                사역 | 행사
               </button>
               <button 
                 className="mobile-menu-item"
