@@ -9,16 +9,6 @@
   padding: 0 2rem;
 }
 
-.section-header {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.section-header.fade-in-up {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 .section-title {
   font-size: 2rem;

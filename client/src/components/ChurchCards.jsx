@@ -1,57 +1,6 @@
-import { useState, useEffect, useRef } from 'react'
 import './ChurchCards.css'
 
 function ChurchCards() {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef(null)
-
-  useEffect(() => {
-    // 초기 상태 확인 - 이미 화면에 보이면 즉시 표시
-    const checkInitialVisibility = () => {
-      if (sectionRef.current) {
-        const rect = sectionRef.current.getBoundingClientRect()
-        const isInViewport = rect.top < window.innerHeight * 0.8 && rect.bottom > 0
-        if (isInViewport) {
-          setIsVisible(true)
-          return true
-        }
-      }
-      return false
-    }
-
-    // 약간의 지연 후 초기 상태 확인 (렌더링 완료 후)
-    const timeoutId = setTimeout(() => {
-      if (!checkInitialVisibility()) {
-        // 화면에 보이지 않으면 Intersection Observer 설정
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                setIsVisible(true)
-                // 한 번만 실행되도록 unobserve
-                observer.unobserve(entry.target)
-              }
-            })
-          },
-          { threshold: 0.1, rootMargin: '50px' }
-        )
-
-        if (sectionRef.current) {
-          observer.observe(sectionRef.current)
-        }
-
-        return () => {
-          if (sectionRef.current) {
-            observer.unobserve(sectionRef.current)
-          }
-        }
-      }
-    }, 100)
-
-    return () => {
-      clearTimeout(timeoutId)
-    }
-  }, [])
   const items = [
     {
       id: 1,
@@ -86,9 +35,9 @@ function ChurchCards() {
   ]
 
   return (
-    <section className="church-cards" ref={sectionRef}>
+    <section className="church-cards">
       <div className="church-intro-container">
-        <div className={`section-header ${isVisible ? 'fade-in-up' : ''}`}>
+        <div className="section-header">
           <h2 className="church-intro-title">
             <span className="title-bold">처음</span>
             <span className="title-light"> 오셨나요?</span>

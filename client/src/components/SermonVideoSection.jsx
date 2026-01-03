@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react'
-import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import './SermonVideoSection.css'
 
 function SermonVideoSection() {
   const [sundaySermon, setSundaySermon] = useState(null)
   const [dawnPrayerSermons, setDawnPrayerSermons] = useState([])
   const [loading, setLoading] = useState(true)
-  const [sectionRef, isVisible] = useScrollAnimation()
 
   useEffect(() => {
     fetchSermons()
@@ -63,8 +61,8 @@ function SermonVideoSection() {
   }
 
   return (
-    <section className="sermon-video-section" ref={sectionRef}>
-      <div className={`sermon-container ${isVisible ? 'fade-in-up' : ''}`}>
+    <section className="sermon-video-section">
+      <div className="sermon-container">
         <div className="sermon-layout">
           {/* 왼쪽: 주일예배 큰 썸네일 */}
           <div className="sermon-main-wrapper">

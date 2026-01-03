@@ -1,62 +1,12 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import './ChangilWindow.css'
 
 function ChangilWindow() {
   const [posts, setPosts] = useState([]) // 갤러리 포스트들
   const [loading, setLoading] = useState(true)
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef(null)
 
   useEffect(() => {
     fetchLatestPosts()
-  }, [])
-
-  useEffect(() => {
-    // 초기 상태 확인 - 이미 화면에 보이면 즉시 표시
-    const checkInitialVisibility = () => {
-      if (sectionRef.current) {
-        const rect = sectionRef.current.getBoundingClientRect()
-        const isInViewport = rect.top < window.innerHeight * 0.8 && rect.bottom > 0
-        if (isInViewport) {
-          setIsVisible(true)
-          return true
-        }
-      }
-      return false
-    }
-
-    // 약간의 지연 후 초기 상태 확인 (렌더링 완료 후)
-    const timeoutId = setTimeout(() => {
-      if (!checkInitialVisibility()) {
-        // 화면에 보이지 않으면 Intersection Observer 설정
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                setIsVisible(true)
-                // 한 번만 실행되도록 unobserve
-                observer.unobserve(entry.target)
-              }
-            })
-          },
-          { threshold: 0.1, rootMargin: '50px' }
-        )
-
-        if (sectionRef.current) {
-          observer.observe(sectionRef.current)
-        }
-
-        return () => {
-          if (sectionRef.current) {
-            observer.unobserve(sectionRef.current)
-          }
-        }
-      }
-    }, 100)
-
-    return () => {
-      clearTimeout(timeoutId)
-    }
   }, [])
 
   // 최신 갤러리 포스트 가져오기 (메인 페이지용)
@@ -102,9 +52,9 @@ function ChangilWindow() {
 
   return (
     <>
-      <section className="changil-window" ref={sectionRef}>
+      <section className="changil-window">
         <div className="changil-window-container">
-          <div className={`section-header ${isVisible ? 'fade-in-up' : ''}`}>
+          <div className="section-header">
             <h2 className="section-title">
               <span className="title-bold">창일</span>
               <span className="title-light"> 갤러리</span>
