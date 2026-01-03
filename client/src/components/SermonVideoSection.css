@@ -12,6 +12,14 @@
   padding: 0 2rem;
   position: relative;
   z-index: 1;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.sermon-container.fade-in-up {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .sermon-layout {
