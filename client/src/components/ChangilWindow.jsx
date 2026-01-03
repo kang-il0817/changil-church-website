@@ -52,9 +52,9 @@ function ChangilWindow() {
 
   return (
     <>
-      <section className="changil-window">
+      <section className="changil-window" data-aos="fade-up">
         <div className="changil-window-container">
-          <div className="section-header">
+          <div className="section-header" data-aos="fade-up" data-aos-delay="100">
             <h2 className="section-title">
               <span className="title-bold">창일</span>
               <span className="title-light"> 갤러리</span>
@@ -63,7 +63,7 @@ function ChangilWindow() {
               은혜와 기쁨의 순간들을 공유합니다.
             </p>
           </div>
-          <div className="window-images">
+          <div className="window-images" data-aos="fade-right" data-aos-delay="200">
             {posts.length > 0 ? (
               posts.map((post, index) => (
                 <div 

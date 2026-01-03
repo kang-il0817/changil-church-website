@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 import Header from './components/Header'
 import MainBanner from './components/MainBanner'
 import SermonVideoSection from './components/SermonVideoSection'
@@ -27,6 +29,14 @@ function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname)
 
   useEffect(() => {
+    // AOS 초기화
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out',
+      once: false, // 계속 실행
+      offset: 100,
+    })
+
     const handleLocationChange = () => {
       setCurrentPath(window.location.pathname)
     }
@@ -38,6 +48,10 @@ function App() {
     window.navigate = (path) => {
       window.history.pushState({}, '', path)
       setCurrentPath(path)
+      // 페이지 변경 시 AOS 새로고침
+      setTimeout(() => {
+        AOS.refresh()
+      }, 100)
     }
     
     return () => {

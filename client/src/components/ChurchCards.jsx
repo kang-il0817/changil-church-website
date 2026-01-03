@@ -35,16 +35,16 @@ function ChurchCards() {
   ]
 
   return (
-    <section className="church-cards">
+    <section className="church-cards" data-aos="fade-up">
       <div className="church-intro-container">
-        <div className="section-header">
+        <div className="section-header" data-aos="fade-up" data-aos-delay="100">
           <h2 className="church-intro-title">
             <span className="title-bold">처음</span>
             <span className="title-light"> 오셨나요?</span>
           </h2>
           <p className="section-description">창일교회를 소개합니다</p>
         </div>
-        <div className="church-intro-items">
+        <div className="church-intro-items" data-aos="fade-right" data-aos-delay="200">
           {items.map(item => {
             const handleClick = () => {
               if (item.title === '교회소개') {

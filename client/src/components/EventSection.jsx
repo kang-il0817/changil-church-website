@@ -74,16 +74,16 @@ function EventSection() {
 
   return (
     <>
-      <section className="event-section">
+      <section className="event-section" data-aos="fade-up">
         <div className="event-container">
-          <div className="section-header">
+          <div className="section-header" data-aos="fade-up" data-aos-delay="100">
             <h2 className="event-section-title">
               <span className="title-bold">사역</span>
               <span className="title-light"> | 행사</span>
             </h2>
             <p className="section-description">함께하면 더욱 행복합니다</p>
           </div>
-          <div className="event-posters-wrapper">
+          <div className="event-posters-wrapper" data-aos="fade-left" data-aos-delay="200">
             <div className="event-posters">
               {displayEvents.map((event, index) => (
                 <div 
