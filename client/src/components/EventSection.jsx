@@ -1,6 +1,27 @@
 import { useState, useEffect } from 'react'
 import './EventSection.css'
 
+// 이벤트 날짜 포맷팅 함수
+const formatEventDate = (event) => {
+  if (event.startDate && event.endDate) {
+    const start = new Date(event.startDate)
+    const end = new Date(event.endDate)
+    const startStr = `${start.getFullYear()}년 ${start.getMonth() + 1}월 ${start.getDate()}일`
+    const endStr = `${end.getMonth() + 1}월 ${end.getDate()}일`
+    return `${startStr} - ${endStr}`
+  } else if (event.startDate) {
+    const start = new Date(event.startDate)
+    return `${start.getFullYear()}년 ${start.getMonth() + 1}월 ${start.getDate()}일`
+  } else if (event.eventDate) {
+    return new Date(event.eventDate).toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })
+  }
+  return null
+}
+
 function EventSection() {
   const [events, setEvents] = useState([])
   const [loading, setLoading] = useState(true)
@@ -149,13 +170,9 @@ function EventSection() {
                     {selectedEvent.title}
                   </h3>
                 )}
-                {selectedEvent.eventDate && (
+                {formatEventDate(selectedEvent) && (
                   <p className="event-modal-date">
-                    {new Date(selectedEvent.eventDate).toLocaleDateString('ko-KR', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
+                    {formatEventDate(selectedEvent)}
                   </p>
                 )}
                 {selectedEvent.description && (

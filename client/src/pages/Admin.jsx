@@ -7,6 +7,27 @@ import SermonManagement from '../components/admin/SermonManagement'
 import { optimizeImage } from '../utils/imageOptimizer'
 import './Admin.css'
 
+// 이벤트 날짜 포맷팅 함수
+const formatEventDate = (event) => {
+  if (event.startDate && event.endDate) {
+    const start = new Date(event.startDate)
+    const end = new Date(event.endDate)
+    const startStr = `${start.getFullYear()}년 ${start.getMonth() + 1}월 ${start.getDate()}일`
+    const endStr = `${end.getMonth() + 1}월 ${end.getDate()}일`
+    return `${startStr} - ${endStr}`
+  } else if (event.startDate) {
+    const start = new Date(event.startDate)
+    return `${start.getFullYear()}년 ${start.getMonth() + 1}월 ${start.getDate()}일`
+  } else if (event.eventDate) {
+    return new Date(event.eventDate).toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })
+  }
+  return '날짜 없음'
+}
+
 function Admin() {
   useAuthCheck()
   const [events, setEvents] = useState([])
@@ -15,6 +36,8 @@ function Admin() {
     title: '',
     description: '',
     eventDate: '',
+    startDate: '',
+    endDate: '',
     order: 0,
   })
   const [eventUploading, setEventUploading] = useState(false)
@@ -246,6 +269,8 @@ function Admin() {
               title: eventFormData.title || '',
               description: eventFormData.description || '',
               eventDate: eventFormData.eventDate || null,
+              startDate: eventFormData.startDate || null,
+              endDate: eventFormData.endDate || null,
               order: eventFormData.order + i,
             })
           } catch (uploadError) {
@@ -308,6 +333,8 @@ function Admin() {
           title: '',
           description: '',
           eventDate: '',
+          startDate: '',
+          endDate: '',
           order: 0,
         })
         setEventSelectedFiles([])
@@ -346,6 +373,8 @@ function Admin() {
           title: '',
           description: '',
           eventDate: '',
+          startDate: '',
+          endDate: '',
           order: 0,
         })
         fetchEvents()
@@ -365,12 +394,20 @@ function Admin() {
     const dateStr = event.eventDate 
       ? new Date(event.eventDate).toISOString().split('T')[0]
       : ''
+    const startDateStr = event.startDate 
+      ? new Date(event.startDate).toISOString().split('T')[0]
+      : ''
+    const endDateStr = event.endDate 
+      ? new Date(event.endDate).toISOString().split('T')[0]
+      : ''
     
     setEventFormData({
       imageUrl: event.imageUrl || '',
       title: event.title || '',
       description: event.description || '',
       eventDate: dateStr,
+      startDate: startDateStr,
+      endDate: endDateStr,
       order: event.order || 0,
     })
     setEditingEvent(event._id)
@@ -1692,13 +1729,35 @@ function Admin() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="eventDate">행사 날짜 (선택사항)</label>
+                <label htmlFor="eventDate">행사 날짜 (선택사항, 기존 호환성)</label>
                 <input
                   type="date"
                   id="eventDate"
                   value={eventFormData.eventDate}
                   onChange={(e) => setEventFormData({ ...eventFormData, eventDate: e.target.value })}
                 />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="startDate">시작 날짜 (선택사항)</label>
+                <input
+                  type="date"
+                  id="startDate"
+                  value={eventFormData.startDate}
+                  onChange={(e) => setEventFormData({ ...eventFormData, startDate: e.target.value })}
+                />
+                <small>행사 기간의 시작 날짜를 입력하세요</small>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="endDate">끝나는 날짜 (선택사항)</label>
+                <input
+                  type="date"
+                  id="endDate"
+                  value={eventFormData.endDate}
+                  onChange={(e) => setEventFormData({ ...eventFormData, endDate: e.target.value })}
+                />
+                <small>끝나는 날짜를 입력하지 않으면 시작 날짜만 표시됩니다</small>
               </div>
 
               <div className="form-group">
@@ -1752,13 +1811,7 @@ function Admin() {
                           <div className="sermon-item-simple">
                             <div className="sermon-item-type">{event.title || '행사 포스터'}</div>
                             <div className="sermon-item-date">
-                              {event.eventDate 
-                                ? new Date(event.eventDate).toLocaleDateString('ko-KR', {
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric'
-                                  })
-                                : '날짜 없음'}
+                              {formatEventDate(event)}
                             </div>
                             <button
                               onClick={(e) => {

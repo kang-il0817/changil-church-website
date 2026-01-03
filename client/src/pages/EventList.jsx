@@ -3,6 +3,27 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import './EventList.css'
 
+// 이벤트 날짜 포맷팅 함수
+const formatEventDate = (event) => {
+  if (event.startDate && event.endDate) {
+    const start = new Date(event.startDate)
+    const end = new Date(event.endDate)
+    const startStr = `${start.getFullYear()}년 ${start.getMonth() + 1}월 ${start.getDate()}일`
+    const endStr = `${end.getMonth() + 1}월 ${end.getDate()}일`
+    return `${startStr} - ${endStr}`
+  } else if (event.startDate) {
+    const start = new Date(event.startDate)
+    return `${start.getFullYear()}년 ${start.getMonth() + 1}월 ${start.getDate()}일`
+  } else if (event.eventDate) {
+    return new Date(event.eventDate).toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    })
+  }
+  return '-'
+}
+
 function EventList() {
   const [events, setEvents] = useState([])
   const [loading, setLoading] = useState(true)
@@ -78,13 +99,7 @@ function EventList() {
                   >
                     <td className="event-list-table-number">{events.length - index}</td>
                     <td className="event-list-table-date">
-                      {event.eventDate 
-                        ? new Date(event.eventDate).toLocaleDateString('ko-KR', {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit'
-                          })
-                        : '-'}
+                      {formatEventDate(event)}
                     </td>
                     <td className="event-list-table-title">{event.title || '제목 없음'}</td>
                     <td className="event-list-table-author">관리자</td>

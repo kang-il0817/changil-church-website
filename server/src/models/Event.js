@@ -17,6 +17,14 @@ const eventSchema = new mongoose.Schema({
     type: Date,
     default: null,
   },
+  startDate: {
+    type: Date,
+    default: null,
+  },
+  endDate: {
+    type: Date,
+    default: null,
+  },
   order: {
     type: Number,
     default: 0,

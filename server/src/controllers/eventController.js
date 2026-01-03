@@ -4,7 +4,7 @@ const Event = require('../models/Event');
 exports.getAllEvents = async (req, res) => {
   try {
     const events = await Event.find({ isActive: true })
-      .sort({ order: 1, eventDate: -1, createdAt: -1 })
+      .sort({ order: 1, startDate: -1, eventDate: -1, createdAt: -1 })
       .limit(10); // 최대 10개만 표시
     
     res.json(events);
@@ -16,7 +16,7 @@ exports.getAllEvents = async (req, res) => {
 // 행사 포스터 생성
 exports.createEvent = async (req, res) => {
   try {
-    const { imageUrl, title, description, eventDate, order } = req.body;
+    const { imageUrl, title, description, eventDate, startDate, endDate, order } = req.body;
 
     if (!imageUrl) {
       return res.status(400).json({ 
@@ -29,6 +29,8 @@ exports.createEvent = async (req, res) => {
       title: title || '',
       description: description || '',
       eventDate: eventDate || null,
+      startDate: startDate || null,
+      endDate: endDate || null,
       order: order || 0,
       isActive: true,
     });
@@ -48,13 +50,15 @@ exports.createEvent = async (req, res) => {
 exports.updateEvent = async (req, res) => {
   try {
     const { id } = req.params;
-    const { imageUrl, title, description, eventDate, order, isActive } = req.body;
+    const { imageUrl, title, description, eventDate, startDate, endDate, order, isActive } = req.body;
 
     const updateData = {};
     if (imageUrl) updateData.imageUrl = imageUrl;
     if (title !== undefined) updateData.title = title;
     if (description !== undefined) updateData.description = description;
     if (eventDate !== undefined) updateData.eventDate = eventDate;
+    if (startDate !== undefined) updateData.startDate = startDate;
+    if (endDate !== undefined) updateData.endDate = endDate;
     if (order !== undefined) updateData.order = order;
     if (isActive !== undefined) updateData.isActive = isActive;
 
