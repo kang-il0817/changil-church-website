@@ -3,21 +3,32 @@ import './EventSection.css'
 
 // 이벤트 날짜 포맷팅 함수
 const formatEventDate = (event) => {
+  const getDayOfWeek = (date) => {
+    const days = ['일', '월', '화', '수', '목', '금', '토']
+    return days[date.getDay()]
+  }
+
   if (event.startDate && event.endDate) {
     const start = new Date(event.startDate)
     const end = new Date(event.endDate)
-    const startStr = `${start.getFullYear()}년 ${start.getMonth() + 1}월 ${start.getDate()}일`
-    const endStr = `${end.getMonth() + 1}월 ${end.getDate()}일`
-    return `${startStr} - ${endStr}`
+    const startDay = getDayOfWeek(start)
+    const endDay = getDayOfWeek(end)
+    
+    // 같은 년도와 월인 경우
+    if (start.getFullYear() === end.getFullYear() && start.getMonth() === end.getMonth()) {
+      return `${start.getFullYear()}년 ${start.getMonth() + 1}월 ${start.getDate()}일(${startDay})부터 ${end.getDate()}일(${endDay})까지`
+    } else {
+      // 다른 월인 경우
+      return `${start.getFullYear()}년 ${start.getMonth() + 1}월 ${start.getDate()}일(${startDay})부터 ${end.getFullYear()}년 ${end.getMonth() + 1}월 ${end.getDate()}일(${endDay})까지`
+    }
   } else if (event.startDate) {
     const start = new Date(event.startDate)
-    return `${start.getFullYear()}년 ${start.getMonth() + 1}월 ${start.getDate()}일`
+    const startDay = getDayOfWeek(start)
+    return `${start.getFullYear()}년 ${start.getMonth() + 1}월 ${start.getDate()}일(${startDay})`
   } else if (event.eventDate) {
-    return new Date(event.eventDate).toLocaleDateString('ko-KR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
+    const date = new Date(event.eventDate)
+    const day = getDayOfWeek(date)
+    return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일(${day})`
   }
   return null
 }
