@@ -51,11 +51,47 @@ function MainBanner() {
 
   // 동영상 자동 재생 및 루프 설정
   useEffect(() => {
-    if (videoRefs.current[currentIndex]) {
+    if (videoRefs.current[currentIndex] && loadedVideos.length > 0) {
       const video = videoRefs.current[currentIndex]
-      video.play().catch((error) => {
-        // 동영상 자동 재생 실패 (프로덕션에서는 로그 제거)
-      })
+      
+      // 비디오가 준비될 때까지 대기
+      const tryPlay = async () => {
+        // 비디오가 재생 가능한 상태인지 확인
+        if (video.readyState >= 2) { // HAVE_CURRENT_DATA 이상
+          try {
+            // 모바일에서 자동 재생을 위해 여러 번 시도
+            await video.play()
+          } catch (error) {
+            // 자동 재생 실패 시 (모바일 브라우저 정책)
+            // 비디오가 로드되면 자동으로 재생 시도
+            const handleLoadedData = async () => {
+              try {
+                await video.play()
+              } catch (e) {
+                // 여전히 실패하면 사용자 상호작용 필요
+                // 모바일 브라우저 정책으로 인한 정상적인 동작
+              }
+            }
+            
+            if (video.readyState >= 2) {
+              handleLoadedData()
+            } else {
+              video.addEventListener('loadeddata', handleLoadedData, { once: true })
+            }
+          }
+        } else {
+          // 비디오가 아직 준비되지 않았으면 대기
+          video.addEventListener('loadeddata', tryPlay, { once: true })
+          video.addEventListener('canplay', tryPlay, { once: true })
+        }
+      }
+
+      // 약간의 지연 후 재생 시도 (DOM 렌더링 완료 대기)
+      const timeoutId = setTimeout(tryPlay, 100)
+      
+      return () => {
+        clearTimeout(timeoutId)
+      }
     }
   }, [currentIndex, loadedVideos.length])
 
@@ -92,6 +128,14 @@ function MainBanner() {
                 playsInline
                 preload="auto" // 자동 프리로드
                 onEnded={handleVideoEnd}
+                onLoadedData={() => {
+                  // 비디오 데이터가 로드되면 재생 시도
+                  if (videoRefs.current[index] && index === currentIndex) {
+                    videoRefs.current[index].play().catch(() => {
+                      // 자동 재생 실패는 정상 (모바일 브라우저 정책)
+                    })
+                  }
+                }}
                 aria-label={`창일교회 배너 동영상 ${index + 1}`}
               >
                 브라우저가 동영상 태그를 지원하지 않습니다.
