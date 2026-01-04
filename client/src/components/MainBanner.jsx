@@ -13,6 +13,7 @@ function MainBanner() {
   const [loadedVideos, setLoadedVideos] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
+  const [userInteracted, setUserInteracted] = useState(false)
   const videoRefs = useRef([])
 
   // 동영상 로드 확인 - oncanplay 사용 (전체 로드 대신 재생 가능할 때)
@@ -49,6 +50,38 @@ function MainBanner() {
     checkVideos()
   }, [])
 
+  // 사용자 상호작용 감지 (크롬 모바일 자동 재생을 위해 필요)
+  useEffect(() => {
+    const handleUserInteraction = async () => {
+      if (!userInteracted) {
+        setUserInteracted(true)
+        // 사용자 상호작용 후 비디오 재생 시도
+        if (videoRefs.current[currentIndex]) {
+          const video = videoRefs.current[currentIndex]
+          try {
+            if (video.paused) {
+              await video.play()
+            }
+          } catch (error) {
+            // 재생 실패는 정상 (일부 브라우저 정책)
+          }
+        }
+      }
+    }
+
+    // 다양한 사용자 상호작용 이벤트 리스너 추가
+    const events = ['touchstart', 'touchend', 'click', 'scroll', 'mousedown', 'pointerdown']
+    events.forEach(event => {
+      document.addEventListener(event, handleUserInteraction, { once: true, passive: true })
+    })
+
+    return () => {
+      events.forEach(event => {
+        document.removeEventListener(event, handleUserInteraction)
+      })
+    }
+  }, [userInteracted, currentIndex])
+
   // 동영상 자동 재생 및 루프 설정
   useEffect(() => {
     if (videoRefs.current[currentIndex] && loadedVideos.length > 0) {
@@ -63,20 +96,13 @@ function MainBanner() {
             await video.play()
           } catch (error) {
             // 자동 재생 실패 시 (모바일 브라우저 정책)
-            // 비디오가 로드되면 자동으로 재생 시도
-            const handleLoadedData = async () => {
+            // 사용자 상호작용 후 재생 시도
+            if (userInteracted) {
               try {
                 await video.play()
               } catch (e) {
                 // 여전히 실패하면 사용자 상호작용 필요
-                // 모바일 브라우저 정책으로 인한 정상적인 동작
               }
-            }
-            
-            if (video.readyState >= 2) {
-              handleLoadedData()
-            } else {
-              video.addEventListener('loadeddata', handleLoadedData, { once: true })
             }
           }
         } else {
@@ -93,7 +119,19 @@ function MainBanner() {
         clearTimeout(timeoutId)
       }
     }
-  }, [currentIndex, loadedVideos.length])
+  }, [currentIndex, loadedVideos.length, userInteracted])
+
+  // 사용자 상호작용 후 재생 시도
+  useEffect(() => {
+    if (userInteracted && videoRefs.current[currentIndex]) {
+      const video = videoRefs.current[currentIndex]
+      if (video.paused) {
+        video.play().catch(() => {
+          // 재생 실패는 정상
+        })
+      }
+    }
+  }, [userInteracted, currentIndex])
 
   // 동영상이 끝나면 다음으로 이동 (여러 개일 경우)
   const handleVideoEnd = () => {
