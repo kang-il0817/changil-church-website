@@ -13,7 +13,6 @@ function MainBanner() {
   const [loadedVideos, setLoadedVideos] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
-  const [userInteracted, setUserInteracted] = useState(false)
   const videoRefs = useRef([])
 
   // 동영상 로드 확인 - oncanplay 사용 (전체 로드 대신 재생 가능할 때)
@@ -50,39 +49,7 @@ function MainBanner() {
     checkVideos()
   }, [])
 
-  // 사용자 상호작용 감지 (크롬 모바일 자동 재생을 위해 필요)
-  useEffect(() => {
-    const handleUserInteraction = async () => {
-      if (!userInteracted) {
-        setUserInteracted(true)
-        // 사용자 상호작용 후 비디오 재생 시도
-        if (videoRefs.current[currentIndex]) {
-          const video = videoRefs.current[currentIndex]
-          try {
-            if (video.paused) {
-              await video.play()
-            }
-          } catch (error) {
-            // 재생 실패는 정상 (일부 브라우저 정책)
-          }
-        }
-      }
-    }
-
-    // 다양한 사용자 상호작용 이벤트 리스너 추가
-    const events = ['touchstart', 'touchend', 'click', 'scroll', 'mousedown', 'pointerdown']
-    events.forEach(event => {
-      document.addEventListener(event, handleUserInteraction, { once: true, passive: true })
-    })
-
-    return () => {
-      events.forEach(event => {
-        document.removeEventListener(event, handleUserInteraction)
-      })
-    }
-  }, [userInteracted, currentIndex])
-
-  // 동영상 자동 재생 및 루프 설정
+  // 동영상 자동 재생 및 루프 설정 (단순화된 버전)
   useEffect(() => {
     if (videoRefs.current[currentIndex] && loadedVideos.length > 0) {
       const video = videoRefs.current[currentIndex]
@@ -92,46 +59,75 @@ function MainBanner() {
         // 비디오가 재생 가능한 상태인지 확인
         if (video.readyState >= 2) { // HAVE_CURRENT_DATA 이상
           try {
-            // 모바일에서 자동 재생을 위해 여러 번 시도
             await video.play()
           } catch (error) {
-            // 자동 재생 실패 시 (모바일 브라우저 정책)
-            // 사용자 상호작용 후 재생 시도
-            if (userInteracted) {
-              try {
-                await video.play()
-              } catch (e) {
-                // 여전히 실패하면 사용자 상호작용 필요
+            // 자동 재생 실패 시 여러 번 재시도
+            const retryPlay = async (retries = 3) => {
+              if (retries > 0) {
+                await new Promise(resolve => setTimeout(resolve, 500))
+                try {
+                  await video.play()
+                } catch (e) {
+                  await retryPlay(retries - 1)
+                }
               }
             }
+            await retryPlay()
           }
         } else {
           // 비디오가 아직 준비되지 않았으면 대기
-          video.addEventListener('loadeddata', tryPlay, { once: true })
-          video.addEventListener('canplay', tryPlay, { once: true })
+          const handleReady = async () => {
+            try {
+              await video.play()
+            } catch (error) {
+              // 재생 실패는 정상 (모바일 브라우저 정책)
+            }
+          }
+          video.addEventListener('loadeddata', handleReady, { once: true })
+          video.addEventListener('canplay', handleReady, { once: true })
+          video.addEventListener('canplaythrough', handleReady, { once: true })
         }
       }
 
       // 약간의 지연 후 재생 시도 (DOM 렌더링 완료 대기)
-      const timeoutId = setTimeout(tryPlay, 100)
+      const timeoutId = setTimeout(tryPlay, 200)
       
       return () => {
         clearTimeout(timeoutId)
       }
     }
-  }, [currentIndex, loadedVideos.length, userInteracted])
+  }, [currentIndex, loadedVideos.length])
 
-  // 사용자 상호작용 후 재생 시도
+  // 사용자 상호작용 감지 (백업용 - 자동 재생 실패 시)
   useEffect(() => {
-    if (userInteracted && videoRefs.current[currentIndex]) {
-      const video = videoRefs.current[currentIndex]
-      if (video.paused) {
-        video.play().catch(() => {
-          // 재생 실패는 정상
-        })
+    let hasInteracted = false
+    
+    const handleUserInteraction = async () => {
+      if (!hasInteracted && videoRefs.current[currentIndex]) {
+        hasInteracted = true
+        const video = videoRefs.current[currentIndex]
+        if (video.paused) {
+          try {
+            await video.play()
+          } catch (error) {
+            // 재생 실패는 정상
+          }
+        }
       }
     }
-  }, [userInteracted, currentIndex])
+
+    // 다양한 사용자 상호작용 이벤트 리스너 추가
+    const events = ['touchstart', 'touchend', 'click', 'scroll']
+    events.forEach(event => {
+      window.addEventListener(event, handleUserInteraction, { passive: true })
+    })
+
+    return () => {
+      events.forEach(event => {
+        window.removeEventListener(event, handleUserInteraction)
+      })
+    }
+  }, [currentIndex])
 
   // 동영상이 끝나면 다음으로 이동 (여러 개일 경우)
   const handleVideoEnd = () => {
