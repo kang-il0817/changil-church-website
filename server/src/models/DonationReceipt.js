@@ -36,6 +36,10 @@ const donationReceiptSchema = new mongoose.Schema({
     type: String,
     default: '', // 법인일 때만 사용 (파일 URL)
   },
+  otherRequests: {
+    type: String,
+    default: '', // 기타 요청사항
+  },
   status: {
     type: String,
     enum: ['대기', '처리중', '완료', '거부'],

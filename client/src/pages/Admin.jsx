@@ -2309,6 +2309,11 @@ function Admin() {
                                 )}
                               </>
                             )}
+                            {receipt.otherRequests && (
+                              <div className="donation-receipt-info-row">
+                                <strong>기타 요청사항:</strong> {receipt.otherRequests}
+                              </div>
+                            )}
                           </div>
                           <div className="donation-receipt-actions">
                             <select

@@ -30,7 +30,7 @@ exports.getDonationReceiptById = async (req, res) => {
 // 신청 내역 생성
 exports.createDonationReceipt = async (req, res) => {
   try {
-    const { type, name, contact, email, residentNumber, address, corporateName, businessRegistrationFile } = req.body;
+    const { type, name, contact, email, residentNumber, address, corporateName, businessRegistrationFile, otherRequests } = req.body;
 
     if (!type || !name || !contact || !email) {
       return res.status(400).json({ 
@@ -61,6 +61,7 @@ exports.createDonationReceipt = async (req, res) => {
       address: type === '개인' ? address : '',
       corporateName: type === '법인' ? corporateName : '',
       businessRegistrationFile: type === '법인' ? businessRegistrationFile : '',
+      otherRequests: otherRequests || '',
       status: '대기',
     });
 
