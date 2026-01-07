@@ -15,6 +15,7 @@ function DonationReceipt() {
     address: '',
     corporateName: '',
     businessRegistrationFile: null,
+    otherRequests: '',
   });
   const [businessRegistrationPreview, setBusinessRegistrationPreview] = useState(null);
   const [agreed, setAgreed] = useState(false);
@@ -152,6 +153,7 @@ function DonationReceipt() {
           address: type === '개인' ? formData.address : '',
           corporateName: type === '법인' ? formData.corporateName : '',
           businessRegistrationFile: type === '법인' ? formData.businessRegistrationFile : '',
+          otherRequests: formData.otherRequests,
         }),
       });
 
@@ -168,6 +170,7 @@ function DonationReceipt() {
           address: '',
           corporateName: '',
           businessRegistrationFile: null,
+          otherRequests: '',
         });
         setBusinessRegistrationPreview(null);
         setAgreed(false);
@@ -343,6 +346,22 @@ function DonationReceipt() {
                 </div>
               </>
             )}
+
+            {/* 기타 요청사항 */}
+            <div className="form-group">
+              <label htmlFor="otherRequests" className="form-label-optional">기타 요청사항</label>
+              <textarea
+                id="otherRequests"
+                name="otherRequests"
+                value={formData.otherRequests}
+                onChange={handleInputChange}
+                rows="4"
+                placeholder="기타 요청사항이 있으신 분은 입력해주세요."
+              />
+              <small className="form-note">
+                기타 요청사항이 있으신 분은 입력해주세요.
+              </small>
+            </div>
 
             {/* 약관 동의 */}
             <div className="form-group agreement-group">
