@@ -55,7 +55,7 @@ exports.createPastorSchedule = async (req, res) => {
       startDate,
       endDate: endDate || null,
       description: description || '',
-      color: color || '#ff6b35',
+      color: color || '#718096',
       order: order || 0,
       isActive: true,
     });

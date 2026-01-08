@@ -123,7 +123,7 @@ function Admin() {
     startDate: '',
     endDate: '',
     description: '',
-    color: '#ff6b35',
+    color: '#718096',
     order: 0,
   })
   const [pastorScheduleLoading, setPastorScheduleLoading] = useState(false)
@@ -1319,7 +1319,7 @@ function Admin() {
             startDate: '',
             endDate: '',
             description: '',
-            color: '#ff6b35',
+            color: '#718096',
             order: 0,
           })
           setIsPastorScheduleEditMode(false)
@@ -1350,7 +1350,7 @@ function Admin() {
             startDate: '',
             endDate: '',
             description: '',
-            color: '#ff6b35',
+            color: '#718096',
             order: 0,
           })
           fetchPastorSchedules()
@@ -1384,7 +1384,7 @@ function Admin() {
       startDate: '',
       endDate: '',
       description: '',
-      color: '#ff6b35',
+      color: '#718096',
       order: 0,
     })
     setIsPastorScheduleEditMode(false)

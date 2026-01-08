@@ -19,7 +19,7 @@ const pastorScheduleSchema = new mongoose.Schema({
   },
   color: {
     type: String,
-    default: '#ff6b35', // 기본 오렌지색
+    default: '#718096', // 기본 회색 (R 113, G 128, B 150)
   },
   order: {
     type: Number,
