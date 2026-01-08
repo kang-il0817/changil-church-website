@@ -115,6 +115,20 @@ function Admin() {
   // 연말정산 신청 관련 state
   const [donationReceipts, setDonationReceipts] = useState([])
   const [donationReceiptLoading, setDonationReceiptLoading] = useState(false)
+  
+  // 목회일정 관련 state
+  const [pastorSchedules, setPastorSchedules] = useState([])
+  const [pastorScheduleFormData, setPastorScheduleFormData] = useState({
+    title: '',
+    startDate: '',
+    endDate: '',
+    description: '',
+    color: '#ff6b35',
+    order: 0,
+  })
+  const [pastorScheduleLoading, setPastorScheduleLoading] = useState(false)
+  const [editingPastorSchedule, setEditingPastorSchedule] = useState(null)
+  const [isPastorScheduleEditMode, setIsPastorScheduleEditMode] = useState(false)
 
   useEffect(() => {
     fetchEvents()
@@ -122,6 +136,7 @@ function Admin() {
     fetchGalleryPosts()
     fetchPopups()
     fetchDonationReceipts()
+    fetchPastorSchedules()
   }, [])
 
   // 행사 포스터 관련 함수들
@@ -1260,6 +1275,141 @@ function Admin() {
     }
   }
 
+  // 목회일정 관련 함수들
+  const fetchPastorSchedules = async () => {
+    try {
+      const response = await fetch('/api/pastor-schedules')
+      if (!response.ok) {
+        console.error('목회일정 로드 실패:', response.status, response.statusText)
+        setPastorSchedules([])
+        return
+      }
+      const data = await response.json()
+      setPastorSchedules(data || [])
+    } catch (error) {
+      console.error('목회일정을 불러오는 중 오류:', error)
+      setPastorSchedules([])
+    }
+  }
+
+  const handlePastorScheduleSubmit = async (e) => {
+    e.preventDefault()
+    setPastorScheduleLoading(true)
+
+    try {
+      if (isPastorScheduleEditMode && editingPastorSchedule) {
+        const response = await fetch(`/api/pastor-schedules/${editingPastorSchedule}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...pastorScheduleFormData,
+            startDate: pastorScheduleFormData.startDate || null,
+            endDate: pastorScheduleFormData.endDate || null,
+          }),
+        })
+
+        const data = await response.json()
+
+        if (response.ok) {
+          setMessage({ type: 'success', text: '목회일정이 성공적으로 수정되었습니다!' })
+          setPastorScheduleFormData({
+            title: '',
+            startDate: '',
+            endDate: '',
+            description: '',
+            color: '#ff6b35',
+            order: 0,
+          })
+          setIsPastorScheduleEditMode(false)
+          setEditingPastorSchedule(null)
+          fetchPastorSchedules()
+        } else {
+          setMessage({ type: 'error', text: data.message || '오류가 발생했습니다.' })
+        }
+      } else {
+        const response = await fetch('/api/pastor-schedules', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...pastorScheduleFormData,
+            startDate: pastorScheduleFormData.startDate || null,
+            endDate: pastorScheduleFormData.endDate || null,
+          }),
+        })
+
+        const data = await response.json()
+
+        if (response.ok) {
+          setMessage({ type: 'success', text: '목회일정이 성공적으로 추가되었습니다!' })
+          setPastorScheduleFormData({
+            title: '',
+            startDate: '',
+            endDate: '',
+            description: '',
+            color: '#ff6b35',
+            order: 0,
+          })
+          fetchPastorSchedules()
+        } else {
+          setMessage({ type: 'error', text: data.message || '오류가 발생했습니다.' })
+        }
+      }
+    } catch (error) {
+      setMessage({ type: 'error', text: '서버에 연결할 수 없습니다.' })
+    } finally {
+      setPastorScheduleLoading(false)
+    }
+  }
+
+  const handlePastorScheduleEdit = (schedule) => {
+    setPastorScheduleFormData({
+      title: schedule.title || '',
+      startDate: schedule.startDate ? new Date(schedule.startDate).toISOString().split('T')[0] : '',
+      endDate: schedule.endDate ? new Date(schedule.endDate).toISOString().split('T')[0] : '',
+      description: schedule.description || '',
+      color: schedule.color || '#ff6b35',
+      order: schedule.order || 0,
+    })
+    setEditingPastorSchedule(schedule._id)
+    setIsPastorScheduleEditMode(true)
+  }
+
+  const handlePastorScheduleCancelEdit = () => {
+    setPastorScheduleFormData({
+      title: '',
+      startDate: '',
+      endDate: '',
+      description: '',
+      color: '#ff6b35',
+      order: 0,
+    })
+    setIsPastorScheduleEditMode(false)
+    setEditingPastorSchedule(null)
+  }
+
+  const handlePastorScheduleDelete = async (id) => {
+    if (!confirm('정말 이 목회일정을 삭제하시겠습니까?')) return
+
+    try {
+      const response = await fetch(`/api/pastor-schedules/${id}`, {
+        method: 'DELETE',
+      })
+
+      if (response.ok) {
+        setMessage({ type: 'success', text: '목회일정이 삭제되었습니다.' })
+        fetchPastorSchedules()
+      } else {
+        setMessage({ type: 'error', text: '삭제 중 오류가 발생했습니다.' })
+      }
+    } catch (error) {
+      setMessage({ type: 'error', text: '서버에 연결할 수 없습니다.' })
+    }
+  }
+
   const handleReceiptDelete = async (id) => {
     if (!confirm('정말 이 신청 내역을 삭제하시겠습니까?')) return
 
@@ -1287,6 +1437,7 @@ function Admin() {
       case 'bulletin': return '주보 관리'
       case 'popup': return '팝업 관리'
       case 'donation-receipt': return '연말정산 신청 관리'
+      case 'pastor-schedule': return '목회일정 관리'
       default: return '관리자 페이지'
     }
   }
@@ -1342,6 +1493,12 @@ function Admin() {
                 onClick={() => setActiveTab('donation-receipt')}
               >
                 연말정산 신청 관리
+              </button>
+              <button
+                className={`admin-menu-item ${activeTab === 'pastor-schedule' ? 'active' : ''}`}
+                onClick={() => setActiveTab('pastor-schedule')}
+              >
+                목회일정 관리
               </button>
             </div>
           </div>
@@ -2339,6 +2496,162 @@ function Admin() {
                   ) : (
                     <div className="sermon-empty">
                       <p>신청 내역이 없습니다</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* 목회일정 관리 섹션 */}
+            {activeTab === 'pastor-schedule' && (
+              <div className="admin-content">
+                <div className="admin-form-section">
+                  <h2>{isPastorScheduleEditMode ? '목회일정 수정' : '새 목회일정 추가'}</h2>
+                  {isPastorScheduleEditMode && (
+                    <button 
+                      type="button" 
+                      onClick={handlePastorScheduleCancelEdit}
+                      className="cancel-edit-button"
+                    >
+                      수정 취소
+                    </button>
+                  )}
+                  <form onSubmit={handlePastorScheduleSubmit} className="sermon-form">
+                    <div className="form-group">
+                      <label htmlFor="pastorScheduleTitle">제목 *</label>
+                      <input
+                        type="text"
+                        id="pastorScheduleTitle"
+                        value={pastorScheduleFormData.title}
+                        onChange={(e) => setPastorScheduleFormData({ ...pastorScheduleFormData, title: e.target.value })}
+                        placeholder="예: 송구영신예배"
+                        required
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="pastorScheduleStartDate">시작 날짜 *</label>
+                      <input
+                        type="date"
+                        id="pastorScheduleStartDate"
+                        value={pastorScheduleFormData.startDate}
+                        onChange={(e) => setPastorScheduleFormData({ ...pastorScheduleFormData, startDate: e.target.value })}
+                        required
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="pastorScheduleEndDate">종료 날짜 (선택사항)</label>
+                      <input
+                        type="date"
+                        id="pastorScheduleEndDate"
+                        value={pastorScheduleFormData.endDate}
+                        onChange={(e) => setPastorScheduleFormData({ ...pastorScheduleFormData, endDate: e.target.value })}
+                      />
+                      <small>종료 날짜를 입력하지 않으면 하루짜리 일정으로 표시됩니다.</small>
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="pastorScheduleDescription">설명 (선택사항)</label>
+                      <textarea
+                        id="pastorScheduleDescription"
+                        value={pastorScheduleFormData.description}
+                        onChange={(e) => setPastorScheduleFormData({ ...pastorScheduleFormData, description: e.target.value })}
+                        rows="4"
+                        placeholder="일정에 대한 추가 설명을 입력하세요."
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="pastorScheduleColor">색상</label>
+                      <input
+                        type="color"
+                        id="pastorScheduleColor"
+                        value={pastorScheduleFormData.color}
+                        onChange={(e) => setPastorScheduleFormData({ ...pastorScheduleFormData, color: e.target.value })}
+                      />
+                      <small>캘린더에 표시될 색상을 선택하세요.</small>
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="pastorScheduleOrder">순서 (선택사항)</label>
+                      <input
+                        type="number"
+                        id="pastorScheduleOrder"
+                        value={pastorScheduleFormData.order}
+                        onChange={(e) => setPastorScheduleFormData({ ...pastorScheduleFormData, order: parseInt(e.target.value) || 0 })}
+                        placeholder="0"
+                        min="0"
+                      />
+                      <small>숫자가 작을수록 먼저 표시됩니다.</small>
+                    </div>
+
+                    <button 
+                      type="submit" 
+                      className="submit-button" 
+                      disabled={pastorScheduleLoading || !pastorScheduleFormData.title || !pastorScheduleFormData.startDate}
+                    >
+                      {pastorScheduleLoading 
+                        ? '저장 중...' 
+                        : isPastorScheduleEditMode
+                          ? '목회일정 수정'
+                          : '목회일정 추가'}
+                    </button>
+                  </form>
+                </div>
+
+                <div className="admin-list-section">
+                  <h2>현재 등록된 목회일정 ({pastorSchedules.length}건)</h2>
+                  {pastorSchedules.length > 0 ? (
+                    <div className="sermon-list">
+                      {pastorSchedules.map((schedule) => (
+                        <div key={schedule._id} className="sermon-item">
+                          <div className="sermon-info">
+                            <h3>{schedule.title}</h3>
+                            <p>
+                              <strong>기간:</strong>{' '}
+                              {schedule.endDate 
+                                ? `${new Date(schedule.startDate).toLocaleDateString('ko-KR')} - ${new Date(schedule.endDate).toLocaleDateString('ko-KR')}`
+                                : new Date(schedule.startDate).toLocaleDateString('ko-KR')}
+                            </p>
+                            {schedule.description && (
+                              <p><strong>설명:</strong> {schedule.description}</p>
+                            )}
+                            <p>
+                              <strong>색상:</strong>{' '}
+                              <span 
+                                style={{ 
+                                  display: 'inline-block', 
+                                  width: '20px', 
+                                  height: '20px', 
+                                  backgroundColor: schedule.color || '#ff6b35',
+                                  borderRadius: '4px',
+                                  verticalAlign: 'middle',
+                                  marginLeft: '8px'
+                                }}
+                              />
+                            </p>
+                          </div>
+                          <div className="sermon-actions">
+                            <button
+                              onClick={() => handlePastorScheduleEdit(schedule)}
+                              className="edit-button"
+                            >
+                              수정
+                            </button>
+                            <button
+                              onClick={() => handlePastorScheduleDelete(schedule._id)}
+                              className="delete-button"
+                            >
+                              삭제
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="sermon-empty">
+                      <p>등록된 목회일정이 없습니다</p>
                     </div>
                   )}
                 </div>

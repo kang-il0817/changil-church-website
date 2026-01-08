@@ -23,6 +23,7 @@ import GalleryPost from './pages/GalleryPost'
 import EventList from './pages/EventList'
 import ComingSoon from './pages/ComingSoon'
 import DonationReceipt from './pages/DonationReceipt'
+import PastorSchedule from './pages/PastorSchedule'
 import './App.css'
 
 function App() {
@@ -162,6 +163,11 @@ function App() {
   // 연말정산 신청 페이지
   if (currentPath === '/donation-receipt') {
     return <DonationReceipt />
+  }
+
+  // 목회일정 페이지
+  if (currentPath === '/pastor-schedule') {
+    return <PastorSchedule />
   }
 
   // 메인 페이지

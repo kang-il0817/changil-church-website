@@ -124,6 +124,23 @@ function EventList() {
             </div>
           )}
         </div>
+
+        <div className="event-list-table-header">
+          <a 
+            href="/pastor-schedule" 
+            onClick={(e) => {
+              e.preventDefault()
+              if (window.navigate) {
+                window.navigate('/pastor-schedule')
+              } else {
+                window.location.href = '/pastor-schedule'
+              }
+            }}
+            className="event-list-pastor-schedule-link"
+          >
+            목회일정 보기
+          </a>
+        </div>
       </div>
       <Footer />
     </div>

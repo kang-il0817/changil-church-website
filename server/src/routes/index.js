@@ -14,6 +14,7 @@ router.use('/events', require('./events'));
 router.use('/bulletins', require('./bulletins'));
 router.use('/popups', require('./popups'));
 router.use('/donation-receipts', require('./donationReceipts'));
+router.use('/pastor-schedules', require('./pastorSchedules'));
 
 module.exports = router;
 

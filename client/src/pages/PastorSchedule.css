@@ -1,0 +1,405 @@
+.pastor-schedule-page {
+  min-height: 100vh;
+  background: #ffffff;
+  padding: 4rem 2rem;
+  padding-top: 6rem;
+}
+
+.pastor-schedule-page .header {
+  box-shadow: none !important;
+}
+
+.pastor-schedule-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+}
+
+.pastor-schedule-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.pastor-schedule-title {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0;
+}
+
+.pastor-schedule-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.month-nav-button,
+.today-button {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.month-nav-button {
+  padding: 0.75rem 1rem;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.month-nav-button:hover,
+.today-button:hover {
+  background: #5568d3;
+}
+
+.calendar-wrapper {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  overflow-x: auto;
+}
+
+.calendar-grid {
+  min-width: 1000px;
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  margin-bottom: 1px;
+  background: #e2e8f0;
+}
+
+.calendar-day-header {
+  background: #ffffff;
+  padding: 1rem;
+  text-align: center;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4a5568;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.calendar-day-header .day-short {
+  display: none;
+}
+
+.calendar-day-header.sunday {
+  color: #e53e3e;
+}
+
+.calendar-week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+  background: #e2e8f0;
+  min-height: 120px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.calendar-day {
+  background: #ffffff;
+  padding: 0.5rem;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: visible;
+  border-right: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.calendar-day:first-child {
+  border-left: 1px solid #e2e8f0;
+}
+
+.calendar-day.other-month {
+  background: #f7fafc;
+  color: #cbd5e0;
+}
+
+.calendar-day.today {
+  background: #ffffff;
+}
+
+.calendar-day-number {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  width: 1.8rem;
+  height: 1.8rem;
+  line-height: 1.8rem;
+  text-align: center;
+}
+
+.calendar-day-number.sunday {
+  color: #e53e3e;
+}
+
+.calendar-day.other-month .calendar-day-number {
+  color: #cbd5e0;
+}
+
+.calendar-day.other-month .calendar-day-number.sunday {
+  color: #fc8181;
+}
+
+.calendar-day.today .calendar-day-number {
+  background: #667eea;
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 50%;
+}
+
+.calendar-day.today .calendar-day-number.sunday {
+  background: #e53e3e;
+  color: #ffffff;
+}
+
+.calendar-day-schedules {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: visible;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+  position: relative;
+  z-index: 1;
+  width: calc(100% + 1rem);
+}
+
+.schedule-item {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+  height: 24px;
+  min-height: 24px;
+  max-height: 24px;
+  margin-left: 0;
+  margin-right: 0;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+}
+
+.schedule-item:hover {
+  opacity: 0.8;
+}
+
+.schedule-start {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.schedule-end {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.schedule-middle {
+  border-radius: 0;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+/* 모달 스타일 */
+.schedule-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+.schedule-modal {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.schedule-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #718096;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.schedule-modal-close:hover {
+  color: #2d3748;
+}
+
+.schedule-modal-title {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 0 1rem 0;
+  padding-right: 2rem;
+}
+
+.schedule-modal-date {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 1rem;
+  color: #4a5568;
+  margin-bottom: 1rem;
+}
+
+.schedule-modal-description {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 0.95rem;
+  color: #718096;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #718096;
+  font-family: 'Pretendard', sans-serif;
+}
+
+@media (max-width: 768px) {
+  .pastor-schedule-page {
+    padding: 2rem 1rem;
+    padding-top: 4rem;
+  }
+
+  .pastor-schedule-container {
+    margin-top: 1rem;
+  }
+
+  .pastor-schedule-title {
+    font-size: 1.75rem;
+  }
+
+  .pastor-schedule-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .calendar-wrapper {
+    padding: 0.5rem;
+    overflow-x: visible;
+  }
+
+  .calendar-grid {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .calendar-header {
+    gap: 0;
+  }
+
+  .calendar-day-header {
+    padding: 0.5rem 0.25rem;
+    font-size: 0.7rem;
+  }
+
+  .calendar-day-header .day-full {
+    display: none;
+  }
+
+  .calendar-day-header .day-short {
+    display: inline;
+  }
+
+  .calendar-week {
+    gap: 0;
+  }
+
+  .calendar-day {
+    min-height: 80px;
+    padding: 0.25rem;
+  }
+
+  .calendar-day-number {
+    font-size: 0.75rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .schedule-item {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.3rem;
+    height: 20px;
+    min-height: 20px;
+    max-height: 20px;
+  }
+
+  .schedule-modal {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .schedule-modal-title {
+    font-size: 1.25rem;
+  }
+}
+
