@@ -20,22 +20,21 @@ function getDescription(post) {
   )
 
   if (textSection?.content) {
-    return textSection.content.replace(/\s+/g, ' ').trim().slice(0, 150)
+    return textSection.content
+      .replace(/["“”']/g, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .slice(0, 120)
   }
 
   return '창일교회 갤러리 — 은혜와 기쁨의 순간들을 공유합니다.'
 }
 
-function absoluteUrl(url, origin) {
-  if (!url) return `${origin}/pastor-photo.jpg`
-  if (/^https?:\/\//i.test(url)) return url
-  return `${origin}${url.startsWith('/') ? '' : '/'}${url}`
-}
-
-function buildMetaTags({ title, description, image, pageUrl }) {
+function buildMetaTags({ title, description, image }) {
+  // og:url은 카카오가 재스크랩하는 원인이 될 수 있어 넣지 않음
   return `
     <meta name="description" content="${description}" />
-    <meta property="og:type" content="article" />
+    <meta property="og:type" content="website" />
     <meta property="og:locale" content="ko_KR" />
     <meta property="og:site_name" content="창일교회" />
     <meta property="og:title" content="${title}" />
@@ -43,12 +42,12 @@ function buildMetaTags({ title, description, image, pageUrl }) {
     <meta property="og:image" content="${image}" />
     <meta property="og:image:secure_url" content="${image}" />
     <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:url" content="${pageUrl}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${title}" />
     <meta name="twitter:description" content="${description}" />
     <meta name="twitter:image" content="${image}" />
-    <link rel="canonical" href="${pageUrl}" />
   `
 }
 
@@ -64,7 +63,7 @@ function buildBotHtml({ title, description, image, pageUrl, metaTags }) {
 <body>
   <h1>${title}</h1>
   <p>${description}</p>
-  <img src="${image}" alt="${title}" />
+  <img src="${image}" alt="${title}" width="600" />
   <p><a href="${pageUrl}">${pageUrl}</a></p>
 </body>
 </html>`
@@ -101,7 +100,11 @@ export default async function handler(req, res) {
 
   let title = '창일 갤러리'
   let description = '창일교회 갤러리 — 은혜와 기쁨의 순간들을 공유합니다.'
-  let image = `${origin}/pastor-photo.jpg`
+  // 카카오는 외부(Supabase) 이미지의 x-robots-tag:none 때문에 스크랩이 실패할 수 있어
+  // 동일 도메인 프록시 URL을 og:image로 사용한다.
+  let image = id
+    ? `${origin}/api/gallery-thumbnail?id=${encodeURIComponent(id)}&v=3`
+    : `${origin}/pastor-photo.jpg`
 
   if (id) {
     try {
@@ -110,7 +113,9 @@ export default async function handler(req, res) {
         const post = await response.json()
         title = post.title || title
         description = getDescription(post)
-        image = absoluteUrl(post.thumbnail, origin)
+        if (!post.thumbnail) {
+          image = `${origin}/pastor-photo.jpg`
+        }
       }
     } catch (error) {
       console.error('gallery-og fetch failed:', error)
@@ -125,13 +130,11 @@ export default async function handler(req, res) {
     title: safeTitle,
     description: safeDescription,
     image: safeImage,
-    pageUrl: safeUrl,
   })
 
   res.setHeader('Content-Type', 'text/html; charset=utf-8')
-  res.setHeader('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=600')
+  res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate')
 
-  // 카카오/페북 등 크롤러에는 가벼운 OG 전용 HTML을 반환
   if (isBot) {
     res.statusCode = 200
     return res.end(
@@ -153,7 +156,6 @@ export default async function handler(req, res) {
       /<meta\s+(?:name|property)="(?:description|og:[^"]+|twitter:[^"]+)"[^>]*>\s*/gi,
       ''
     )
-    // 스크립트보다 앞쪽(head 시작)에 OG 메타를 넣어 스크래퍼 호환성 향상
     html = html.replace(/<head([^>]*)>/i, `<head$1>${metaTags}`)
 
     res.statusCode = 200
