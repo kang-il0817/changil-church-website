@@ -19,6 +19,43 @@ function GalleryPost({ id }) {
     }
   }, [id])
 
+  // 브라우저 탭/공유용 메타 정보 반영 (크롤러 OG는 Vercel api/gallery-og에서 처리)
+  useEffect(() => {
+    if (!post) return
+
+    const previousTitle = document.title
+    const description =
+      post.sections?.find((section) => section.type === 'text' && section.content)?.content
+        ?.replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, 150) || '창일교회 갤러리 — 은혜와 기쁨의 순간들을 공유합니다.'
+
+    document.title = `${post.title} | 창일교회`
+
+    const upsertMeta = (attr, key, content) => {
+      let el = document.head.querySelector(`meta[${attr}="${key}"]`)
+      if (!el) {
+        el = document.createElement('meta')
+        el.setAttribute(attr, key)
+        document.head.appendChild(el)
+      }
+      el.setAttribute('content', content)
+    }
+
+    upsertMeta('property', 'og:title', post.title)
+    upsertMeta('property', 'og:description', description)
+    upsertMeta('property', 'og:image', post.thumbnail || '/pastor-photo.jpg')
+    upsertMeta('property', 'og:url', window.location.href)
+    upsertMeta('name', 'description', description)
+    upsertMeta('name', 'twitter:title', post.title)
+    upsertMeta('name', 'twitter:description', description)
+    upsertMeta('name', 'twitter:image', post.thumbnail || '/pastor-photo.jpg')
+
+    return () => {
+      document.title = previousTitle
+    }
+  }, [post])
+
   const fetchPost = async (postId) => {
     try {
       const response = await fetch(`/api/gallery-posts/${postId}`)
