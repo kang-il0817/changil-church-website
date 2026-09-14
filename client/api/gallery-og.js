@@ -103,7 +103,7 @@ export default async function handler(req, res) {
   // 카카오는 외부(Supabase) 이미지의 x-robots-tag:none 때문에 스크랩이 실패할 수 있어
   // 동일 도메인 프록시 URL을 og:image로 사용한다.
   let image = id
-    ? `${origin}/api/gallery-thumbnail?id=${encodeURIComponent(id)}&v=3`
+    ? `${origin}/og-thumb/${encodeURIComponent(id)}.jpg`
     : `${origin}/pastor-photo.jpg`
 
   if (id) {

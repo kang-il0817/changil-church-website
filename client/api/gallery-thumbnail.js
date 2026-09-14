@@ -2,8 +2,19 @@ const API_BASE =
   process.env.API_BASE_URL ||
   'https://changil-church-website-backend-f3cef88b0d96.herokuapp.com'
 
+function getId(req) {
+  if (typeof req.query.id === 'string' && req.query.id) return req.query.id
+  if (Array.isArray(req.query.id) && req.query.id[0]) return req.query.id[0]
+
+  // /api/gallery-thumbnail/6aa7.... 또는 rewrite 된 /og-thumb/6aa7....
+  const url = new URL(req.url, 'https://www.changil.net')
+  const parts = url.pathname.split('/').filter(Boolean)
+  const last = parts[parts.length - 1] || ''
+  return last.replace(/\.(jpe?g|png|webp)$/i, '')
+}
+
 export default async function handler(req, res) {
-  const id = typeof req.query.id === 'string' ? req.query.id : req.query.id?.[0]
+  const id = getId(req)
   if (!id) {
     res.statusCode = 400
     return res.end('Missing id')

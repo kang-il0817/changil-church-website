@@ -16,6 +16,10 @@
       "destination": "/api/gallery-og?id=:id"
     },
     {
+      "source": "/og-thumb/:id",
+      "destination": "/api/gallery-thumbnail?id=:id"
+    },
+    {
       "source": "/api/:path*",
       "destination": "https://changil-church-website-backend-f3cef88b0d96.herokuapp.com/api/:path*"
     },
