@@ -1,12 +1,11 @@
-const API_BASE =
-  process.env.API_BASE_URL ||
-  'https://changil-church-website-backend-f3cef88b0d96.herokuapp.com'
+import { createRequire } from 'module'
+
+const require = createRequire(import.meta.url)
 
 function getId(req) {
   if (typeof req.query.id === 'string' && req.query.id) return req.query.id
   if (Array.isArray(req.query.id) && req.query.id[0]) return req.query.id[0]
 
-  // /api/gallery-thumbnail/6aa7.... 또는 rewrite 된 /og-thumb/6aa7....
   const url = new URL(req.url, 'https://www.changil.net')
   const parts = url.pathname.split('/').filter(Boolean)
   const last = parts[parts.length - 1] || ''
@@ -21,14 +20,12 @@ export default async function handler(req, res) {
   }
 
   try {
-    const postRes = await fetch(`${API_BASE}/api/gallery-posts/${id}`)
-    if (!postRes.ok) {
-      res.statusCode = 404
-      return res.end('Not found')
-    }
+    const connectDB = require('../_server/config/database')
+    const GalleryPost = require('../_server/models/GalleryPost')
+    await connectDB()
 
-    const post = await postRes.json()
-    const imageUrl = post.thumbnail
+    const post = await GalleryPost.findById(id).lean()
+    const imageUrl = post?.thumbnail
     if (!imageUrl) {
       res.statusCode = 404
       return res.end('No thumbnail')

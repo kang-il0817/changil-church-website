@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
+    // 이미 연결된 경우 재사용 (Vercel 서버리스 cold start 최적화)
+    if (mongoose.connection.readyState === 1) {
+      return mongoose.connection;
+    }
+
     // 기본값: MongoDB Atlas 주소 (프로덕션)
     const defaultMongoURI = 'mongodb+srv://kangil0817_db_user:af04%402839R@cluster0.jflvwnu.mongodb.net/changilweb?authSource=admin';
     

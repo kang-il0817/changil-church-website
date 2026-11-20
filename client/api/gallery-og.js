@@ -1,6 +1,6 @@
-const API_BASE =
-  process.env.API_BASE_URL ||
-  'https://changil-church-website-backend-f3cef88b0d96.herokuapp.com'
+import { createRequire } from 'module'
+
+const require = createRequire(import.meta.url)
 
 function escapeHtml(value = '') {
   return String(value)
@@ -85,6 +85,24 @@ async function loadIndexHtml(origin) {
   }
 }
 
+async function fetchPost(id) {
+  try {
+    const connectDB = require('../_server/config/database')
+    const GalleryPost = require('../_server/models/GalleryPost')
+    await connectDB()
+    return await GalleryPost.findById(id).lean()
+  } catch (error) {
+    console.error('gallery-og direct DB fetch failed, trying HTTP:', error.message)
+    const apiBase =
+      process.env.API_BASE_URL ||
+      process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}` ||
+      'https://www.changil.net'
+    const response = await fetch(`${apiBase}/api/gallery-posts/${id}`)
+    if (!response.ok) return null
+    return response.json()
+  }
+}
+
 export default async function handler(req, res) {
   const id = typeof req.query.id === 'string' ? req.query.id : req.query.id?.[0]
   const host = req.headers['x-forwarded-host'] || req.headers.host || 'www.changil.net'
@@ -100,9 +118,8 @@ export default async function handler(req, res) {
 
   if (id) {
     try {
-      const response = await fetch(`${API_BASE}/api/gallery-posts/${id}`)
-      if (response.ok) {
-        const post = await response.json()
+      const post = await fetchPost(id)
+      if (post) {
         title = post.title || title
         description = getDescription(post)
         if (!post.thumbnail) {
@@ -135,8 +152,6 @@ export default async function handler(req, res) {
       /<meta\s+(?:name|property)="(?:description|og:[^"]+|twitter:[^"]+)"[^>]*>\s*/gi,
       ''
     )
-    // 모든 방문/크롤러에게 SPA + OG 메타를 함께 제공
-    // (카카오톡 인앱 브라우저도 KakaoTalk UA라 봇 전용 HTML을 쓰면 안 됨)
     html = html.replace(/<head([^>]*)>/i, `<head$1>${metaTags}`)
 
     res.statusCode = 200

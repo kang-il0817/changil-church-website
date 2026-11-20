@@ -1,12 +1,17 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run vercel-build",
   "outputDirectory": "dist",
   "functions": {
+    "api/[...path].js": {
+      "includeFiles": "_server/**",
+      "maxDuration": 30
+    },
     "api/gallery-og.js": {
-      "includeFiles": "dist/index.html",
+      "includeFiles": "{dist/index.html,_server/**}",
       "maxDuration": 10
     },
     "api/gallery-thumbnail.js": {
+      "includeFiles": "_server/**",
       "maxDuration": 10
     }
   },
@@ -18,10 +23,6 @@
     {
       "source": "/og-thumb/:id",
       "destination": "/api/gallery-thumbnail?id=:id"
-    },
-    {
-      "source": "/api/:path*",
-      "destination": "https://changil-church-website-backend-f3cef88b0d96.herokuapp.com/api/:path*"
     },
     {
       "source": "/(.*)",
