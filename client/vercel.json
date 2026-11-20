@@ -2,7 +2,7 @@
   "buildCommand": "npm run vercel-build",
   "outputDirectory": "dist",
   "functions": {
-    "api/[...path].js": {
+    "api/index.js": {
       "includeFiles": "_server/**",
       "maxDuration": 30
     },
@@ -16,6 +16,18 @@
     }
   },
   "rewrites": [
+    {
+      "source": "/api/gallery-og",
+      "destination": "/api/gallery-og"
+    },
+    {
+      "source": "/api/gallery-thumbnail",
+      "destination": "/api/gallery-thumbnail"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "/api"
+    },
     {
       "source": "/gallery/:id",
       "destination": "/api/gallery-og?id=:id"

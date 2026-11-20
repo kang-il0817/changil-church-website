@@ -36,10 +36,20 @@ app.use(async (req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to Changilweb API' })
+  res.json({ message: 'Welcome to Changilweb API', service: 'vercel-serverless' })
 })
 
+// 정상 경로: /api/sermons 등
 app.use('/api', routes)
+
+// rewrite 후 경로가 /sermons 처럼 들어오는 경우 대비
+app.use((req, res, next) => {
+  if (req.url === '/health' || req.url.startsWith('/health?')) {
+    req.url = '/api/health' + (req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '')
+  }
+  next()
+})
+app.use(routes)
 
 app.use((err, req, res, next) => {
   console.error('API error:', err.stack)
